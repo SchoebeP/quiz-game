@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+// VARIABLES ===========================================
+$purple: #cdb4db;
+$cream: #ffc8dd;
+$pink: #ffafcc;
+$cyan: #bde0fe;
+$blue: #a2d2ff;
+$font: "Comfortaa", "sans-serif";
+$font-family-sans-serif: $font;
+
+$gradient: linear-gradient(90deg, rgba(255,175,204,1) 0%, rgba(205,180,219,1) 48%, rgba(162,210,255,1) 89%);
+
+
+// OVERRIDES ===========================================
+// Ici récuperer les variables de "_variables.scss" et les override.
+
+//Styles généraux du body / resets
+body {
+    background: $gradient;
+}
+
+//Styles du texte
+
+//Styles des composants (boutons, nav, etc..)
+
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';
