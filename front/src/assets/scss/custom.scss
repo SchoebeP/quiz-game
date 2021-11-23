@@ -14,15 +14,28 @@ $gradient: linear-gradient(90deg, rgba(255,175,204,1) 0%, rgba(205,180,219,1) 48
 
 // OVERRIDES ===========================================
 // Ici récuperer les variables de "_variables.scss" et les override.
-
+@function rem-calc($size) {
+    $remSize: $size / 16;
+    @return #{$remSize}rem;
+  }
 //Styles généraux du body / resets
+
+
 body {
-    background: $gradient;
+    background: white;
+}
+
+.row {
+    justify-content: center
 }
 
 //Styles du texte
 
 //Styles des composants (boutons, nav, etc..)
+.btn {
+    border: none !important;
+    border-radius: 50%
+}
 
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';

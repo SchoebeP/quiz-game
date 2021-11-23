@@ -2,14 +2,17 @@ import App from './App.vue'
 import Vue from 'vue'
 import router from './router'
 import { BootstrapVue } from 'bootstrap-vue'
+import '/src/assets/scss/_resets.scss'
+// import '/src/assets/scss/_animations.scss'
 import '/src/assets/scss/custom.scss'
 
-// Import Bootstrap an BootstrapVue CSS files (order is important)
+
+
+// d'abord bootstrap puis bootstrap-vue
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
-// Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 
 new Vue({
