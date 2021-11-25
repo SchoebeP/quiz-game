@@ -27,7 +27,7 @@ export default {
   top: 0;
   left: 0;
   height: 100vh;
-  background: transparent;
+  background: $gradient;
 
   a {
     font-weight: bold;
