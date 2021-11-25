@@ -1,5 +1,5 @@
 <template>
-  <b-button class="cta glow-on-hover" size="lg">{{ msg }}</b-button>
+  <b-button class="cta glow-on-hover" size="lg" @click="$router.push('categories')">{{ msg }}</b-button>
 </template>
 
 <script>
@@ -19,18 +19,20 @@ export default {
     height: 6rem;
     border: none;
     outline: none;
-    color: #fff;
-    background: transparent;
+    color: $white;
     cursor: pointer;
     position: relative;
     z-index: 0;
     border-radius: 10px;
     transition: all .18s ease-in-out;
+
+    text-transform: uppercase;
+    font-weight: 800;
 }
 
 .glow-on-hover:before {
     content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background: $gradient;
     position: absolute;
     top: -2px;
     left:-2px;
@@ -45,13 +47,6 @@ export default {
     border-radius: 10px;
 }
 
-.glow-on-hover:active {
-    color: #000
-}
-
-.glow-on-hover:active:after {
-    background: transparent;
-}
 
 .glow-on-hover:hover:before {
     opacity: 1;

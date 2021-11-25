@@ -27,7 +27,7 @@ export default {
 @import '/src/assets/scss/custom.scss';
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: $font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -36,7 +36,7 @@ export default {
 }
 
 .page-content {
-  background: $gradient;
+  background: $white;
 }
 
 .landing-row {

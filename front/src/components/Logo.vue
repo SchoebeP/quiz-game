@@ -1,6 +1,6 @@
 <template>
   <div class="logo-wrapper pt-5">
-    <img class="logo" src="../assets/img/Logo1.png" alt="" />
+    <img class="logo" src="../assets/img/Logo.png" alt="" />
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss" scoped>
 .logo {
-  width: 80%;
+  width: 50%;
   height: auto;
 }
 </style>
