@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-container fluid>
+    <b-container fluid class="page-content">
       <b-row>
         <b-col cols="4" class="p-0">
           <SideBar/>
@@ -32,6 +32,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+}
+
+.page-content {
+  background: $gradient;
 }
 
 .landing-row {

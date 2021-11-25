@@ -1,11 +1,8 @@
-
 <template>
-  <div>
-    <div id="nav" class="p-0">
-      <Logo />
-      <!-- <router-link to="/">Home</router-link> |
+  <div id="nav" class="p-0 ">
+    <Logo />
+    <!-- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
-    </div>
   </div>
 </template>
 
@@ -30,7 +27,7 @@ export default {
   top: 0;
   left: 0;
   height: 100vh;
-  background: $gradient;
+  background: transparent;
 
   a {
     font-weight: bold;
@@ -40,10 +37,5 @@ export default {
       color: #42b983;
     }
   }
-}
-
-.logo {
-  width: 80%;
-  height: auto;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <img class="logo" src="../assets/img/Logo.svg" alt="" />
+  <div class="logo-wrapper pt-5">
+    <img class="logo" src="../assets/img/Logo1.png" alt="" />
   </div>
 </template>
 
@@ -11,5 +11,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @import url('/src/assets/scss/_animations.scss');
+.logo {
+  width: 80%;
+  height: auto;
+}
 </style>
