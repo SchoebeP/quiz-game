@@ -1,0 +1,15 @@
+{
+  "name": "quiz-game",
+  "version": "1.0.0",
+  "description": "monoRepos",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces":["front", "back"],
+  "scripts": {
+    "dev:back":"npm run serve --workspace=back",
+    "dev:front":"npm run serve --workspace=front",
+    "build": "npm run build --workspace=front",
+    "start": "npm run serve --workspaces"
+  }
+}
