@@ -24,7 +24,7 @@ router.post("/", async(req,res)=>{
 //Get Categorie  avec Id
 
 router.get('/:_id', async(req, res)=>{
-    const categorie = await CategorieService.findOneCategorie(req.query);
+    const categorie = await CategorieService.findOneCategories(req.query);
     res.json(categorie)
 })
 
