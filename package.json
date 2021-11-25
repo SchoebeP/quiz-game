@@ -5,11 +5,11 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "workspaces":["front", "back"],
+  "workspaces":["front", "Back"],
   "scripts": {
-    "dev:back":"npm run serve --workspace=back",
+    "dev:back":"npm run start --workspace=Back",
     "dev:front":"npm run serve --workspace=front",
-    "build": "npm run build --workspace=front",
-    "start": "npm run serve --workspaces"
+    "build": "npm run build --workspace=front"
+    
   }
 }

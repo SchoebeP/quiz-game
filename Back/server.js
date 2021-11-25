@@ -1,26 +1,29 @@
-const express = require('express')
-const app = express()
-const categorie = require('./models/categorie.json')
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const connectDB = require('./config/db');
+
+const app = express();
+
+
+//middleware
+
+app.use(express.json());
+app.use(cors());
+
+
 
 /**
- * Import MongoClient & connexion à la DB
+ * Import mongoose & connexion à la DB
  */
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
-const dbName = 'FullStackApi';
-let db
- 
-MongoClient.connect(url, function(err, client) {
-  console.log("Connected successfully to server");
-  db = client.db(dbName);
-});
+connectDB() 
 
-app.use(express.json())
 
-app.get('/categorie', (req,res) => {
-    res.status(200).json(categorie)
-})
+// routes
+app.use("/categories", require('./routes/CategorieRoute'));
 
-app.listen(8080, () => {
-    console.log("Serveur à l'écoute")
-})
+
+//run server
+
+const port = process.env.PORT||8080
+app.listen( port,err =>err?console.log(err):console.log(`connected on port ${port}`) );
