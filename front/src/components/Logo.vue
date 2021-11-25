@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss" scoped>
 .logo {
-  width: 80%;
+  width: 50%;
   height: auto;
 }
 </style>
