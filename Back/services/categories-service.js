@@ -9,12 +9,11 @@ const exposeServices = {
             return allC;
         }
         catch(err){
-            return err;
+            res.status(500).send({ message: err.message || 'probleme avec la recuperation des categories' });
         }
     },
 
-    findOneCategories: async function(query){
-        let {_id} = query;
+    findOneCategories: async function(_id){
         try {
             let cat = await Categories.findOne({_id}).exec();
             return cat;
@@ -32,7 +31,20 @@ const exposeServices = {
         }catch(error) {
             return error;
         }
-    }
+    },
+    deleteOne: async function(_id) {
+        try{
+          deleteCat=  await Categories.findByIdAndRemove({_id}).exec();
+            return deleteCat;
+        }
+        catch(error) {
+            res.status(500).send({ message: error.message || 'probleme avec la supression' });
+
+        }
+    },
+
+
+    
 }
 
 module.exports = exposeServices;

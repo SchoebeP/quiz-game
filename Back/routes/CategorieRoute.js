@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 const CategorieService = require(path.join(HOMEDIR, 'services', 'categories-service'));
-
+const categories = require('../models/categorieSchema')
 //route GetALL Categories
 
 router.get("/", async(req,res)=>{
@@ -24,7 +24,9 @@ router.post("/", async(req,res)=>{
 //Get Categorie  avec Id
 
 router.get('/:_id', async(req, res)=>{
-    const categorie = await CategorieService.findOneCategories(req.query);
+    console.log(req.params)
+    const {_id} = req.params;
+    const categorie = await CategorieService.findOneCategories(_id);
     res.json(categorie)
 })
 
@@ -32,13 +34,20 @@ router.get('/:_id', async(req, res)=>{
 // PUT avec id 
 
 router.put("/:_id", async(req, res)=>{
-    res.json({msg: 'Put id'})
+    const {_id}=req.params
+
+    const {name}=req.body
+    categories.findOneAndUpdate({_id},{name})
+    .then(categorie=>res.send(categorie))
+    .catch(err=>console.log(err))
 })
 
 //Delete avec id 
 
 router.delete("/:_id", async(req, res)=>{
-    res.json({msg: 'Delete id'})
+    const {_id}=req.params
+    const categorie = await CategorieService.deleteOne(_id);
+    res.json(categorie)
 })
 
 module.exports = router

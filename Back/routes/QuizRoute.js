@@ -2,8 +2,8 @@ const path = require('path')
 const HOMEDIR = path.join(__dirname, '..');
 const express = require('express')
 const router = express.Router()
-
-const QuizService = require(path.join(HOMEDIR, 'quiz-service'));
+const quiz = require('../models/quizSchema')
+const QuizService = require(path.join(HOMEDIR, 'services', 'quiz-service'));
 
 //GETALL Quiz
 
@@ -22,20 +22,28 @@ router.post("/", async(req, res) => {
 //Get Quiz with id 
 
 router.get("/:_id", async(req, res)=>{
-    const quiz = await QuizService.findOneQuiz(req.query);
+    console.log(req.params)
+    const {_id} = req.params;
+    const quiz = await QuizService.findOneQuiz(_id);
     res.json(quiz)
 })
 
 //PUT with id 
 
 router.put("/:_id", async(req, res) => {
-    res.json({msg: 'Put id'})
+    const {_id}=req.params
+    const {name} = req.body
+    quiz.findByIdAndUpdate({_id}, {name})
+    .then(quiz => res.send(quiz))
+    .catch(err => console.log(err))
 })
 
 // Delete with id
 
 router.delete("/:_id", async(req, res)=>{
-    res.json({msg: 'Delete id'})
+    const {_id}=req.params
+    const quiz = await QuizService.deleteOneQuiz(_id);
+    res.json(quiz)
 })
 
 module.exports = router

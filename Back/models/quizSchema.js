@@ -13,7 +13,6 @@ const QuizSchema = new mongoose.Schema({
     },
     id_user:{
         type: Number,
-        required: true,
     },
     date:{
         type: Date,
