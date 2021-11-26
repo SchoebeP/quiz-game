@@ -41,7 +41,7 @@ router.put("/:_id", async(req, res) => {
 // Delete with id
 
 router.delete("/:id", async(req, res)=>{
-    const {_id}=req.params
+    const {id}=req.params
     const quiz = await QuizService.deleteOneQuiz(id);
     res.json(quiz)
 })
