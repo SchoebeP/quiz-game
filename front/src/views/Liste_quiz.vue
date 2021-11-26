@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <h1>Liste des quiz</h1>
-    <div v-for="quiz in quiz" :key="quiz.id">
-      {{ quiz.name }}
+  <div class="page">
+    <div v-for="quiz in quizs" :key="quiz.id">
+      <div class="liste" v-if="quiz.id_categorie == idCategorie">
+        <router-link :to="{ name: '', params: {} }">
+          <div class="quiz">{{ quiz.name }}</div>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "liste_quiz",
   data() {
@@ -20,12 +25,29 @@ export default {
     this.idCategorie = this.$route.params.id;
     console.log(this.idCategorie);
     axios
-      .get("http://localhost:8080/quiz", { params: { id: this.idCategorie } })
+      .get("http://localhost:5000/quiz")
       .then((response) => (this.quizs = response.data));
-    console.log(this.quizs);
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "/src/assets/scss/custom.scss";
+
+.page {
+  margin: 15%;
+}
+
+.liste {
+  display: flex;
+  align-items: center;
+}
+.quiz {
+  text-align: left;
+  font-size: 40px;
+  border-bottom: 2px solid $purple;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  color: black;
+}
 </style>

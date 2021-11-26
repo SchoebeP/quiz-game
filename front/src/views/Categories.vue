@@ -17,9 +17,7 @@
         v-for="categorie in categories"
         :key="categorie.id"
       >
-        <router-link
-          :to="{ name: 'id_Categorie', params: { id: categorie.id } }"
-        >
+        <router-link :to="{ name: 'liste_quiz', params: { id: categorie.id }}">
           <div>
             <img
               class="cat_img"
@@ -64,10 +62,10 @@ export default {
   methods: {},
   mounted () {
     axios
-      .get('http://localhost:5000/categories')
-      .then(response => (this.categories = response.data))
-  }
-}
+      .get("http://localhost:5000/categories")
+      .then((response) => (this.categories = response.data));
+  },
+};
 </script>
 
 <style lang="scss" scoped>
