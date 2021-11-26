@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <PlayButton msg="Jouer" />
+    <b-row>
+      <PlayButton msg="Jouer" />
+    </b-row>
+    <b-row justify-end class="minion_row" >
+      <Minion title="Accueil"/>
+    </b-row>
   </div>
 </template>
 
@@ -8,11 +13,13 @@
 // @ is an alias to /src
 
 import PlayButton from '@/components/PlayButton.vue'
+import Minion from '../components/Minion.vue'
 
 export default {
   name: 'Home',
   components: {
-    PlayButton
+    PlayButton,
+    Minion,
   }
 }
 </script>
@@ -20,8 +27,16 @@ export default {
 <style lang="scss">
 .home {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh !important; 
+}
+
+.minion_row {
+  position: fixed;
+  bottom: 2rem;
+  right: 7rem;
+
 }
 </style>
