@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Categories</h1>
     <b-row
       class="justify-content-center align-content-center m-0 categories-list"
     >
@@ -15,19 +14,19 @@
           justify-content-center
           p-0
         "
-        v-for="cat in cats"
-        :key="cat.id"
+        v-for="categorie in categories"
+        :key="categorie.id"
       >
         <div>
           <div>
-            <img :src="tabIcon[cat.id - 1]" width="50px" alt="" />
+            <img :src="tabIcon[categorie.id - 1]" width="50px" alt="" />
           </div>
           <p>
-            {{ cat.title }}
+            {{ categorie.name }}
           </p>
         </div>
       </div>
-    </b-row>
+    </b-row>    
   </div>
 </template>
 
@@ -38,38 +37,22 @@ import cinema from "../assets/img/cinema.png"
 import informatique from "../assets/img/sport.png"
 import animaux from "../assets/img/sport.png"
 import culture from "../assets/img/sport.png"
+  import axios from "axios";
 
 export default {
-  data() {
+  name: "Categorie",
+    data() {
     return {
       tabIcon: [informatique, musique, animaux, sport, culture, cinema],
-      cats: [
-        {
-          id: "1",
-          title: "Informatique",
-        },
-        {
-          id: "2",
-          title: "Musique",
-        },
-        {
-          id: "3",
-          title: "Animaux",
-        },
-        {
-          id: "4",
-          title: "Sport",
-        },
-        {
-          id: "5",
-          title: "Culture général",
-        },
-        {
-          id: "6",
-          title: "Cinéma",
-        },
-      ],
+      categories: null,
     };
+  },
+  components: {},
+  methods: {},
+  mounted() {
+    axios
+      .get("http://localhost:8080/categories")
+      .then((response) => (this.categories = response.data));
   },
 };
 </script>
