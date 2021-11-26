@@ -1,8 +1,10 @@
 <template>
   <div>
+{{idQuiz}}
     <div v-for="question in questions" :key="question.id">
-      <div class="liste" v-if="question.id_quiz == idQuiz">
-        {{ questions.question }}
+        {{question.id_quiz}}
+      <div class="liste" v-if="question.id_quiz == 3">
+        {{ question }}
       </div>
     </div>
   </div>
