@@ -25,8 +25,8 @@ const routes = [
   },
   {
     path: '/categories/:id',
-    name: 'id_Categorie',
-    component: () => import('../views/Categorie_id.vue')
+    name: 'liste_quiz',
+    component: () => import('../views/Liste_quiz.vue')
   }
   ,
   {
