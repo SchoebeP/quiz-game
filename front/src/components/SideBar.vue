@@ -23,7 +23,8 @@ export default {
 
 #nav {
   padding: 30px;
-  position: static;
+  position: fixed;
+  width: 33%;
   top: 0;
   left: 0;
   height: 100vh;

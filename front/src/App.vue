@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <b-container fluid class="page-content">
-      <b-row>
-        <b-col cols="4" class="p-0">
+      <b-row class="overflow-hidden">
+        <b-col cols="4" class="p-0 m-auto">
           <SideBar/>
         </b-col>
         <b-col class="p-0">
