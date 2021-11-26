@@ -14,17 +14,18 @@
           justify-content-center
           p-0
         "
+
         v-for="categorie in categories"
         :key="categorie.id"
       >
-        <div>
+        <router-link :to="{ name: 'id_Categorie', params: { id: categorie.id }}">
           <div>
             <img :src="tabIcon[categorie.id - 1]" width="50px" alt="" />
           </div>
           <p>
             {{ categorie.name }}
           </p>
-        </div>
+        </router-link>
       </div>
     </b-row>    
   </div>
