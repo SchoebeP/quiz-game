@@ -22,6 +22,7 @@ connectDB()
 // routes
 app.use("/categories", require('./routes/CategorieRoute'));
 app.use("/quiz", require('./routes/QuizRoute'))
+app.use("/question", require('./routes/QuizQuestionsRoute'));
 
 //run server
 
