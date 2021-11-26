@@ -21,28 +21,28 @@ router.post("/", async(req, res) => {
 
 //Get Quiz with id 
 
-router.get("/:_id", async(req, res)=>{
+router.get("/:id", async(req, res)=>{
     console.log(req.params)
-    const {_id} = req.params;
-    const quiz = await QuizService.findOneQuiz(_id);
+    const {id} = req.params;
+    const quiz = await QuizService.findOneQuiz(id);
     res.json(quiz)
 })
 
 //PUT with id 
 
 router.put("/:_id", async(req, res) => {
-    const {_id}=req.params
+    const {id}=req.params
     const {name} = req.body
-    quiz.findByIdAndUpdate({_id}, {name})
+    quiz.findByIdAndUpdate({id}, {name})
     .then(quiz => res.send(quiz))
     .catch(err => console.log(err))
 })
 
 // Delete with id
 
-router.delete("/:_id", async(req, res)=>{
+router.delete("/:id", async(req, res)=>{
     const {_id}=req.params
-    const quiz = await QuizService.deleteOneQuiz(_id);
+    const quiz = await QuizService.deleteOneQuiz(id);
     res.json(quiz)
 })
 

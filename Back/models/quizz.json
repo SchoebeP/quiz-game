@@ -1,54 +1,63 @@
 [
     {
         "id":1,
+        "id_categorie": 3,
         "name": "Abeille",
         "id_user": null,
         "date": "2021-11-25"
     },
     {
         "id":2,
+        "id_categorie": 4,
         "name": "Basket Européen",
         "id_user": null,
         "date": "2021-11-25"
     },
     {
         "id":3,
+        "id_categorie": 1,
         "name": "Microsoft",
         "id_user": null,
         "date": "2021-11-25"
     },
     {
         "id":4,
+        "id_categorie": 4,
         "name": "Boxe",
         "id_user": null,
         "date": "2021-11-25"
     },
     {
         "id":5,
+        "id_categorie": 1,
         "name": "Crypto Monnaie",
         "id_user": null,
         "date": "2021-11-25"
     },
     {
         "id":6,
+        "id_categorie": 6,
         "name": "Comedie au cinéma",
         "id_user": null,
         "date": "2021-11-25"
     },
     {
         "id":7,
+        "id_categorie": 5,
         "name": "Comédie française",
         "id_user": null,
         "date": "2021-11-25"
     },
     {
         "id":8,
+        "id_categorie": 6,
         "name": "Jurassic World",
         "id_user": null,
         "date": "2021-11-25"
     },
     {
         "id":9,
+        "id_categorie": 6,
         "name": "Marvel",
         "id_user": null,
         "date": "2021-11-25"

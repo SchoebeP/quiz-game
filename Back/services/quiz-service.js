@@ -12,9 +12,9 @@ const quizServices = {
         }
     },
 
-    findOneQuiz: async function(_id) {
+    findOneQuiz: async function(id) {
         try {
-            let quiz = await Quiz.findOne({_id}).exec();
+            let quiz = await Quiz.findOne({id}).exec();
             return quiz;
         } catch (error) {
             return error;
@@ -31,9 +31,9 @@ const quizServices = {
         }
     },
 
-    deleteOneQuiz: async function(_id){
+    deleteOneQuiz: async function(id){
         try {
-            deleteOneQuiz =  await Quiz.findByIdAndRemove({_id})
+            deleteOneQuiz =  await Quiz.findByIdAndRemove({id})
             return deleteOneQuiz;
         } catch (error) {
             res.status(500).send({ message: error.message || 'probleme avec la supression' });

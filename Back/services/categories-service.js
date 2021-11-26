@@ -13,9 +13,9 @@ const exposeServices = {
         }
     },
 
-    findOneCategories: async function(_id){
+    findOneCategories: async function(id){
         try {
-            let cat = await Categories.findOne({_id}).exec();
+            let cat = await Categories.findOne({id}).exec();
             return cat;
             
         } catch (error) {
@@ -32,9 +32,9 @@ const exposeServices = {
             return error;
         }
     },
-    deleteOne: async function(_id) {
+    deleteOne: async function(id) {
         try{
-          deleteCat=  await Categories.findByIdAndRemove({_id}).exec();
+          deleteCat=  await Categories.findByIdAndRemove({id}).exec();
             return deleteCat;
         }
         catch(error) {

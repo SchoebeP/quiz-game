@@ -23,30 +23,30 @@ router.post("/", async(req,res)=>{
 
 //Get Categorie  avec Id
 
-router.get('/:_id', async(req, res)=>{
+router.get('/:id', async(req, res)=>{
     console.log(req.params)
-    const {_id} = req.params;
-    const categorie = await CategorieService.findOneCategories(_id);
+    const {id} = req.params;
+    const categorie = await CategorieService.findOneCategories(id);
     res.json(categorie)
 })
 
 
 // PUT avec id 
 
-router.put("/:_id", async(req, res)=>{
-    const {_id}=req.params
+router.put("/:id", async(req, res)=>{
+    const {id}=req.params
 
     const {name}=req.body
-    categories.findOneAndUpdate({_id},{name})
+    categories.findOneAndUpdate({id},{name})
     .then(categorie=>res.send(categorie))
     .catch(err=>console.log(err))
 })
 
 //Delete avec id 
 
-router.delete("/:_id", async(req, res)=>{
-    const {_id}=req.params
-    const categorie = await CategorieService.deleteOne(_id);
+router.delete("/:id", async(req, res)=>{
+    const {id}=req.params
+    const categorie = await CategorieService.deleteOne(id);
     res.json(categorie)
 })
 
