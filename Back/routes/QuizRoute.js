@@ -22,7 +22,6 @@ router.post("/", async(req, res) => {
 //Get Quiz with id 
 
 router.get("/:id", async(req, res)=>{
-    console.log(req.params)
     const {id} = req.params;
     const quiz = await QuizService.findOneQuiz(id);
     res.json(quiz)
