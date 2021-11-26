@@ -3,7 +3,6 @@ import Vue from 'vue'
 import router from './router'
 import { BootstrapVue } from 'bootstrap-vue'
 import '/src/assets/scss/_resets.scss'
-// import '/src/assets/scss/_animations.scss'
 import '/src/assets/scss/custom.scss'
 
 

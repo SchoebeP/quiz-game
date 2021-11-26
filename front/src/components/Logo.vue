@@ -1,6 +1,6 @@
 <template>
   <div class="logo-wrapper pt-5">
-    <img class="logo" src="../assets/img/Logo1.png" alt="" />
+    <img class="logo" src="../assets/img/logo.png" alt="" />
   </div>
 </template>
 
