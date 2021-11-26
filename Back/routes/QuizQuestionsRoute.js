@@ -23,12 +23,20 @@ router.post("/", async(req,res)=>{
 
 //Get Categorie  avec Id
 
-router.get('/:id', async(req, res)=>{
+/*router.get('/:id', async(req, res)=>{
     console.log(req.params)
     const {id} = req.params;
     const quizQuestions = await QuizQuestionsService.findOneQuizQuestion(id);
     res.json(quizQuestions)
+})*/
+
+router.get('/:id_quiz', async(req, res)=>{
+    console.log(req.params)
+    const {id_quiz} = req.params;
+    const quizQuestions = await QuizQuestionsService.findAllQuestion(id_quiz);
+    res.json(quizQuestions)
 })
+
 
 
 // PUT avec id 

@@ -21,6 +21,16 @@ const quizServices = {
         }
     },
 
+    findAllQuestion: async function(id_quiz) {
+        try {
+            let quizQuestions = await QuizQuestions.find({id_quiz}).limit(10).exec();
+            return quizQuestions;
+        } catch (error) {
+            return error;
+        }
+    },
+
+
     saveOne: async function(data) {
         let oneQuizQ = new QuizQuestions(data);
         try{
