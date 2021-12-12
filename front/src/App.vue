@@ -5,7 +5,7 @@
         <b-col cols="4" class="p-0 m-auto">
           <SideBar/>
         </b-col>
-        <b-col class="p-0">
+        <b-col class="p-0 vh-100 d-flex ">
           <router-view />
         </b-col>
       </b-row>
