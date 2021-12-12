@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="d-flex ml-5 justify-content-center align-items-start flex-column">
     <div v-for="quiz in quizs" :key="quiz.id">
       <div class="liste" v-if="quiz.category_id == idCategorie">
         <router-link :to="{ name: 'quiz', params: {id: quiz.id} }">
@@ -11,19 +11,19 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "liste_quiz",
-  data() {
+  name: 'liste_quiz',
+  data () {
     return {
       idCategorie: null,
-      quizs: null,
-    };
+      quizs: null
+    }
   },
-  mounted() {
-    this.idCategorie = this.$route.params.id;
-    console.log(this.idCategorie);
+  mounted () {
+    this.idCategorie = this.$route.params.id
+    console.log(this.idCategorie)
     axios
       .get("http://localhost:3000/quiz")
       .then((response) => (this.quizs = response.data));
@@ -32,22 +32,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "/src/assets/scss/custom.scss";
-
-.page {
-  margin: 15%;
-}
+@import '/src/assets/scss/custom.scss';
 
 .liste {
   display: flex;
   align-items: center;
 }
-.quiz {
-  text-align: left;
-  font-size: 40px;
-  border-bottom: 2px solid $purple;
-  padding-bottom: 20px;
-  padding-top: 20px;
+.quiz-item {
+  font-size: 2rem;
+  border: none;
+  border-radius: 12px;
+  padding: rem-calc(20) rem-calc(15);
+  margin-bottom: 1rem;
   color: black;
+  box-shadow: 5px 3px 15px -1px rgba(0,0,0,0.74);
+
+  transition: background-color .2s ease-in-out;
 }
+  .quiz-title {
+    color: $black;
+    text-decoration: none !important;
+  }
+
+  &:hover {
+    background-color: $cyan;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
 </style>

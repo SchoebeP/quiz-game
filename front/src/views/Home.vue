@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home w-100">
     <b-row>
       <PlayButton msg="Jouer" />
     </b-row>
