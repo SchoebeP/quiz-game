@@ -2,7 +2,7 @@ const path = require('path')
 const HOMEDIR = path.join(__dirname, '..');
 const express = require('express')
 const router = express.Router()
-const quiz = require('../models/quizSchema')
+const quiz = require('../models/quiz')
 const QuizService = require(path.join(HOMEDIR, 'services', 'quiz-service'));
 
 //GETALL Quiz

@@ -3,20 +3,20 @@ const HOMEDIR = path.join(__dirname, '..');
 const express = require('express')
 const router = express.Router()
 
-const CategorieService = require(path.join(HOMEDIR, 'services', 'categories-service'));
-const categories = require('../models/categorieSchema')
+const QuizQuestionsService = require(path.join(HOMEDIR, 'services', 'quizQuestions-service'));
+const quizQuestions = require('../models/question')
 //route GetALL Categories
 
 router.get("/", async(req,res)=>{
-    const allCategories = await CategorieService.findAllCategories(req.query);
-    res.json(allCategories);
+    const allQuizQuestions = await QuizQuestionsService.findAllQuizQuestions(req.query);
+    res.json(allQuizQuestions);
 
 })
 
 //route POSTALL san id 
 
 router.post("/", async(req,res)=>{
-    const tryToSave = await CategorieService.saveOne(req.body);
+    const tryToSave = await QuizQuestionsService.saveOne(req.body);
     res.json(tryToSave);
 })
 
@@ -26,8 +26,8 @@ router.post("/", async(req,res)=>{
 router.get('/:id', async(req, res)=>{
     console.log(req.params)
     const {id} = req.params;
-    const categorie = await CategorieService.findOneCategories(id);
-    res.json(categorie)
+    const quizQuestions = await QuizQuestionsService.findOneQuizQuestion(id);
+    res.json(quizQuestions)
 })
 
 
@@ -37,8 +37,8 @@ router.put("/:id", async(req, res)=>{
     const {id}=req.params
 
     const {name}=req.body
-    categories.findOneAndUpdate({id},{name})
-    .then(categorie=>res.send(categorie))
+    quizQuestions.findOneAndUpdate({id},{name})
+    .then(quizQuestions=>res.send(quizQuestions))
     .catch(err=>console.log(err))
 })
 
@@ -46,8 +46,8 @@ router.put("/:id", async(req, res)=>{
 
 router.delete("/:id", async(req, res)=>{
     const {id}=req.params
-    const categorie = await CategorieService.deleteOne(id);
-    res.json(categorie)
+    const quizQuestions = await QuizQuestionsService.deleteOne(id);
+    res.json(quizQuestions)
 })
 
 module.exports = router
