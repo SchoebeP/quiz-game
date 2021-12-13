@@ -17,9 +17,9 @@ module.exports = {
         }
     },
 
-    create: async function(name, userId, categoryId, date) {
+    create: async function(name, userId, categoryId) {
         try {
-            return await Quiz.create({ name, user_id: userId, category_id: categoryId, date });
+            return await Quiz.create({ name, user_id: userId, category_id: categoryId });
         } catch (err) {
             return { error: true, message: err };
         }

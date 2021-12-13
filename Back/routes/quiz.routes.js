@@ -1,48 +1,14 @@
-const path = require('path')
-const HOMEDIR = path.join(__dirname, '..');
-const express = require('express')
-const router = express.Router()
-const quiz = require('../models/quiz')
-const QuizService = require(path.join(HOMEDIR, 'services', 'quiz-service'));
+const express = require('express');
+const router = express.Router();
+const QuizController = require('../controllers/quiz');
 
-//GETALL Quiz
+// views
+router.get('/', QuizController.findQuizzes);
+router.get('/:id', QuizController.findQuiz);
 
-router.get("/", async(req, res) => {
-    const allQuizs = await QuizService.findAllQuiz(req.query);
-    res.json(allQuizs);
-})
+// actions
+router.post('/create', QuizController.create);
+router.put('/:id/update', QuizController.update);
+router.delete('/:id/delete', QuizController.delete);
 
-//route POSTALL sans id 
-
-router.post("/", async(req, res) => {
-    const tryToSave = await QuizService.saveOne(req.body);
-    res.json(tryToSave);
-})
-
-//Get Quiz with id 
-
-router.get("/:id", async(req, res)=>{
-    const {id} = req.params;
-    const quiz = await QuizService.findOneQuiz(id);
-    res.json(quiz)
-})
-
-//PUT with id 
-
-router.put("/:_id", async(req, res) => {
-    const {id}=req.params
-    const {name} = req.body
-    quiz.findByIdAndUpdate({id}, {name})
-    .then(quiz => res.send(quiz))
-    .catch(err => console.log(err))
-})
-
-// Delete with id
-
-router.delete("/:id", async(req, res)=>{
-    const {id}=req.params
-    const quiz = await QuizService.deleteOneQuiz(id);
-    res.json(quiz)
-})
-
-module.exports = router
+module.exports = router;
