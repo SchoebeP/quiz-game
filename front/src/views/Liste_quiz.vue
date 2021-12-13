@@ -1,5 +1,6 @@
 <template>
   <div class="d-flex ml-5 justify-content-center align-items-start flex-column">
+    <section></section>
     <div v-for="quiz in quizs" :key="quiz.id">
       <div class="liste" v-if="quiz.category_id == idCategorie">
         <router-link :to="{ name: 'quiz', params: {id: quiz.id} }">
@@ -7,6 +8,9 @@
         </router-link>
       </div>
     </div>
+    <b-row class="w-75 justify-content-end ">
+      <Minion title="Quiz" />
+    </b-row>
   </div>
 </template>
 
@@ -18,12 +22,16 @@ export default {
   data () {
     return {
       idCategorie: null,
-      quizs: null
+      quizs: null,
+      catName: null
     }
   },
+  methods: {
+    getCatName: function (response) {}
+  },
+
   mounted () {
     this.idCategorie = this.$route.params.id
-    console.log(this.idCategorie)
     axios
       .get("http://localhost:3000/quiz")
       .then((response) => (this.quizs = response.data));
@@ -45,7 +53,7 @@ export default {
   padding: rem-calc(20) rem-calc(15);
   margin-bottom: 1rem;
   color: black;
-  box-shadow: 5px 3px 15px -1px rgba(0,0,0,0.74);
+  box-shadow: 5px 3px 15px -1px rgba(0, 0, 0, 0.74);
 
   transition: background-color .2s ease-in-out;
 }

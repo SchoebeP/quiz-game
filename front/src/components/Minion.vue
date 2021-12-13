@@ -1,14 +1,13 @@
 <template>
-  <div class="d-flex flex-column align-items-end">
-    <div class="minion">
-      <div class="minion_text">
-        Vous êtes sur la page
-        <span class="minion_text_bread">
-          {{ title }}
-        </span>
-      </div>
-      <span class="triangle"> </span>
+  <div class="minion">
+    <div class="minion_text">
+      Vous êtes sur la page
+      <span class="minion_text_bread">
+        {{ title }}
+      </span>
     </div>
+    <span class="triangle"> </span>
+
     <img
       class="pt-2 minion_img"
       src="../assets/img/personnage.png"
@@ -30,6 +29,10 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/scss/custom.scss';
 
+.minion {
+  position: relative;
+}
+
 .minion_text {
   border-radius: 12px;
   background: $gradient;
@@ -50,9 +53,11 @@ export default {
 }
 
 .minion_img {
+  position: absolute;
   margin-top: -4rem;
-  transition: all .2s ease-in-out;
-
+  transition: all 0.2s ease-in-out;
+  bottom: -7rem;
+  left: 50%;
   &:hover {
     transform: rotate(-12deg);
   }
