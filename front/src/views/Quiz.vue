@@ -1,29 +1,48 @@
 <template>
   <div>
-    <div class="liste" v-for="(question,index) in questions" :key="question.id">
-      <div v-if="question.id_quiz == idQuiz">
-        {{ question.question }}
+    <div class="liste" v-if="afficheResultat == false">
+      <div v-if="questions[index].id_quiz == idQuiz">
+        {{ questions[index].question }}
       </div>
-      <div v-if="question.id_quiz == idQuiz">
-        <div v-for="(proposition, index2) in question.propositions" >
+      <div v-if="questions[index].id_quiz == idQuiz">
+        <div
+          v-for="(proposition, index2) in questions[index].propositions"
+          :key="proposition"
+        >
           <input
             type="radio"
             v-bind:value="proposition"
-            v-bind:name="question.id"
-            v-bind:id="index+index2"
+            v-bind:id="index2"
+            v-model="checkedResponse"
           />
-          <span>{{ proposition }}</span>
-         
+          <label :for="index2">{{ proposition }}</label>
         </div>
-         <b-button v-on:click="sauvegarder(index)"> Valider </b-button>
+        <b-button v-on:click="sauvegarder(checkedResponse)"> Valider </b-button>
       </div>
     </div>
+    <div v-if="afficheResultat == true">
+      Resultat
+      <div v-for="(response, index3) in listResponse">
+        <div
+          style="background-color: red"
+          v-if="response !== questions[index3].réponse"
+        >
+          {{ questions[index3].question }}
+        </div>
+        <div
+          style="background-color: green"
+          v-if="response == questions[index3].réponse"
+        >
+          {{ questions[index3].question }}
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
 export default {
   name: "quiz",
 
@@ -32,6 +51,10 @@ export default {
       idQuiz: null,
       questions: null,
       propositions: null,
+      checkedResponse: null,
+      listResponse: [],
+      index: 0,
+      afficheResultat: false,
     };
   },
   mounted() {
@@ -44,8 +67,12 @@ export default {
       });
   },
   methods: {
-    sauvegarder: function (proposition) {
-      console.log(document.getElementById(proposition).value);
+    sauvegarder: function (response) {
+      if (this.index < 10) this.index = this.index + 1;
+      if (this.index == 10) this.afficheResultat = true;
+      console.log(response);
+      this.listResponse.push(response);
+      console.log(this.listResponse);
     },
   },
 };
