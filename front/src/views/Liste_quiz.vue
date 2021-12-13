@@ -2,7 +2,7 @@
   <div class="page">
     <div v-for="quiz in quizs" :key="quiz.id">
       <div class="liste" v-if="quiz.id_categorie == idCategorie">
-        <router-link :to="{ name: '', params: {} }">
+        <router-link :to="{ name: 'quiz', params: {id: quiz.id} }">
           <div class="quiz">{{ quiz.name }}</div>
         </router-link>
       </div>
