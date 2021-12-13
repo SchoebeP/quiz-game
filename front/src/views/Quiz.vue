@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="liste" v-if="afficheResultat == false">
+          <progress :value="progress" max="100">70 %</progress>
+
       <div class="question" v-if="questions[index].id_quiz == idQuiz">
         {{ questions[index].question }}
       </div>
@@ -63,6 +65,7 @@ export default {
       listResponse: [],
       index: 0,
       afficheResultat: false,
+      progress: 0,
     };
   },
   mounted() {
@@ -79,6 +82,7 @@ export default {
       if (this.index < 10) this.index = this.index + 1;
       if (this.index == 10) this.afficheResultat = true;
       this.checkedResponse = null;
+      this.progress = this.progress + 10;
       this.listResponse.push(response);
     },
   },
@@ -87,6 +91,28 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/scss/custom.scss";
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+  width: 60%;
+  height: 10px;
+  margin-bottom: 10px;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+  background: $purple;
+    border-radius: 10px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
 
 .liste {
   border-radius: 46px;
