@@ -1,30 +1,27 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const connectDB = require('./config/db');
+require('dotenv').config();
+
+const express = require('express');
+const bodyParser =  require('body-parser');
+const cors = require('cors');
+const databaseConnection = require('./config/database');
 
 const app = express();
 
-
-//middleware
-
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-
-
-/**
- * Import mongoose & connexion à la DB
- */
-connectDB() 
-
+// database connection
+databaseConnection();
 
 // routes
-app.use("/categories", require('./routes/CategorieRoute'));
-app.use("/quiz", require('./routes/QuizRoute'))
-app.use("/question", require('./routes/QuizQuestionsRoute'));
+app.use('/categories', require('./routes/category.routes'));
+app.use('/quiz', require('./routes/quiz.routes'))
+app.use('/question', require('./routes/question.routes'));
 
-//run server
-
-const port = process.env.PORT||5000
-app.listen( port,err =>err?console.log(err):console.log(`connected on port ${port}`) );
+const port = process.env.APP_PORT || 3000;
+app.listen(port,err => {
+    if (err) console.log(err);
+    else console.log(`connected on port ${port}`);
+});
