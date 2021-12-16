@@ -42,32 +42,37 @@
       </div>
     </div>
     <div v-if="afficheResultat == true">
-      Resultat
-      <div v-for="(response, index3) in listResponse">
-        <div
-          style="background-color: red"
-          v-if="response !== questions[index3].answer"
+      <h1>Résultats</h1>
+      <ol class="results">
+        <li
+          class="result-item-wrapper"
+          v-for="(response, index3) in listResponse"
         >
-          {{ questions[index3].question }}
-        </div>
-        <div
-          style="background-color: green"
-          v-if="response == questions[index3].answer"
-        >
-          {{ questions[index3].question }}
-        </div>
-      </div>
+          <div
+            class="result-item wrong"
+            v-if="response !== questions[index3].réponse"
+          >
+            {{ index3 + 1 }}
+          </div>
+          <div
+            class="result-item true"
+            v-if="response == questions[index3].réponse"
+          >
+            {{ index3 + 1 }}
+          </div>
+        </li>
+      </ol>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "quiz",
+  name: 'quiz',
 
-  data() {
+  data () {
     return {
       idQuiz: null,
       questions: null,
@@ -75,13 +80,20 @@ export default {
       checkedResponse: null,
       listResponse: [],
       index: 0,
+      afficheResultat: false
+    }
       afficheResultat: false,
       progress: 0,
     };
   },
-  mounted() {
-    this.idQuiz = this.$route.params.id;
+  mounted () {
+    this.idQuiz = this.$route.params.id
     axios
+      .get('http://localhost:5000/question/' + this.idQuiz)
+      .then(response => {
+        this.questions = response.data
+        this.propositions = this.questions.propositions
+      })
       .get("http://localhost:3000/question/" + this.idQuiz)
       .then((response) => {
         this.questions = response.data;
@@ -90,6 +102,13 @@ export default {
   },
   methods: {
     sauvegarder: function (response) {
+      if (this.index < 10) this.index = this.index + 1
+      if (this.index == 10) this.afficheResultat = true
+      this.checkedResponse = null
+      this.listResponse.push(response)
+    }
+  }
+}
       if (this.index < 10) this.index = this.index + 1;
       if (this.index == 10) this.afficheResultat = true;
       this.checkedResponse = null;
@@ -107,7 +126,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/custom.scss";
+@import '../assets/scss/custom.scss';
 
 .page {
   width: 100%;
@@ -137,6 +156,44 @@ progress[value]::-webkit-progress-value {
   background: $purple;
   border-radius: 10px;
   background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+.results {
+  list-style: none;
+  counter-reset: counter;
+  margin-top: 2rem;
+  .result-item-wrapper {
+    counter-increment: counter;
+    margin: 0.25rem;
+    display: inline-block;
+  }
+}
+
+.result-item {
+  &:hover {
+    -webkit-animation: shadow-drop-center 0.4s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: shadow-drop-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  margin: 0 1rem;
+  font-size: 2rem;
+  flex-basis: 20%;
+}
+
+.true {
+  background-color: $pastel-green;
+}
+.wrong {
+  background-color: $pastel-red;
 }
 
 .liste {
@@ -186,7 +243,7 @@ progress[value]::-webkit-progress-value {
 }
 
 .rad-design::before {
-  content: "";
+  content: '';
 
   display: inline-block;
   width: inherit;
@@ -219,9 +276,16 @@ progress[value]::-webkit-progress-value {
   width: fit-content;
   padding: 5px 10px;
   border-radius: 15px;
+  margin: 0 auto;
+  cursor: pointer;
+}
   cursor: pointer;
   margin-right: 10px;
 
+.button:hover {
+  background-color: $purple;
+  color: white;
+  border-color: $purple;
   &--retour {
     border: 1px solid $pink;
 
