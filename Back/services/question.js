@@ -11,7 +11,9 @@ module.exports = {
 
     findQuestion: async function(QuestionId) {
         try {
-            return await Questions.findById(QuestionId);
+            let reply = await Questions.findOne({id: QuestionId});
+            console.log(reply)
+            return await Questions.findOne({id: QuestionId});
         } catch (err) {
             return { error: true, message: err };
         }

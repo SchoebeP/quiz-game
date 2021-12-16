@@ -17,11 +17,11 @@ module.exports = {
     findQuestion: async function (req, res) {
         try {
             const questionId = req.params.id || {};
-            const question = await QuestionService.findQuestion(questionId);
+            const question = await QuestionService.findQuestion(questionId); // todo faire fonctionner 
+            // console.log("coucocu" + question.data)
             if (!question) {
                 return res.status(404).json('This question does not exist.');
             }
-
             return res.json(question);
         } catch (err) {
             return res.status(500).json({ error: err });

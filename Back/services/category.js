@@ -11,7 +11,7 @@ module.exports = {
 
     findCategory: async function(categoryId) {
         try {
-            return await Category.findById(categoryId);
+            return await Category.findOne({id: categoryId});
         } catch (err) {
             return { error: true, message: err };
         }

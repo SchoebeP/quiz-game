@@ -71,7 +71,7 @@ export default {
   mounted() {
     this.idQuiz = this.$route.params.id;
     axios
-      .get("http://localhost:5000/question/" + this.idQuiz)
+      .get("http://localhost:3000/question/" + this.idQuiz)
       .then((response) => {
         this.questions = response.data;
         this.propositions = this.questions.propositions;
