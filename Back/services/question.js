@@ -19,6 +19,15 @@ module.exports = {
         }
     },
 
+    findListOfQuestionsById: async function(QuizId) {
+        try {
+            console.log(QuizId)
+            return await Questions.find({quiz_id: QuizId});
+        } catch (err) {
+            return { error: true, message: err };
+        }
+    },
+
     create: async function(name, userId, categoryId,propositions ,answer , anecdote) {
         try {
             return await Questions.create({ name, user_id: userId, quiz_id: categoryId ,propositions: propositions ,answer:answer, anecdote:anecdote});

@@ -28,6 +28,22 @@ module.exports = {
         }
     },
 
+    findListOfQuestionsById: async function (req, res) {
+        try {
+            console.log(req)
+            const quiz_id = req.params.quiz_id || {};
+            const listOfQuestions = await QuestionService.findListOfQuestionsById(quiz_id); // todo faire fonctionner 
+            // console.log("coucocu" + question.data)
+            if (!listOfQuestions) {
+                return res.status(404).json('This listOfQuestions does not exist.');
+            }
+            return res.json(listOfQuestions);
+        } catch (err) {
+            return res.status(500).json({ error: err });
+        }
+    },
+
+    
     create: async function(req, res) {
         try {
             const name = req.body.name || '';

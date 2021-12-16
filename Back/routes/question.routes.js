@@ -4,7 +4,9 @@ const QuestionsController = require('../controllers/question');
 
 // views
 router.get('/', QuestionsController.findQuestions);
-router.get('/:id', QuestionsController.findQuestion);
+router.get('/:quiz_id', QuestionsController.findListOfQuestionsById);
+// utilité a revoir 
+//router.get('/:id', QuestionsController.findQuestion);
 
 // actions
 router.post('/create', QuestionsController.create);

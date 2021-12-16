@@ -17,7 +17,7 @@
         v-for="categorie in categories"
         :key="categorie.id"
       >
-        <router-link :to="{ name: 'liste_quiz', params: { id: id_categorie }}">
+        <router-link :to="{ name: 'liste_quiz', params: { id: categorie.id }}">
           <div>
             <img
               class="cat_img"

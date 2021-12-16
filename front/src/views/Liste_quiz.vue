@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div v-for="quiz in quizs" :key="quiz.id">
-      <div class="liste" v-if="quiz.id_categorie == idCategorie">
+      <div class="liste" v-if="quiz.category_id == idCategorie">
         <router-link :to="{ name: 'quiz', params: {id: quiz.id} }">
           <div class="quiz">{{ quiz.name }}</div>
         </router-link>
