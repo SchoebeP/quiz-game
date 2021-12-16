@@ -3,8 +3,10 @@ const UserService = require('../services/user');
 module.exports ={
     authenticate: async function(req, res) {
         try {
-            const username = req.body;
-            const user = await UserService.authenticate(username);
+            const username = req.body.username;
+            const password = req.body.password;
+            const user = await UserService.authenticate(username, password);
+            console.log(user);
             if (!user) {
                 return res.status(400).json({message:'username or password is incorrect' })
             }
@@ -17,7 +19,7 @@ module.exports ={
     register: async function(req, res) {
         try {
             const register = req.body;
-            const user = await UserService.register(register)
+            const user = await UserService.create(register)
             return res.status(200).json(user);
         } catch (error) {
             return res.status(500).json({error: error})    

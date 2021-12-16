@@ -13,3 +13,5 @@ router.post('/authenticate', UsersController.authenticate);
 router.post('/register', UsersController.register);
 router.put('/:id', UsersController.update);
 router.delete('/:id', UsersController.delete);
+
+module.exports = router;
