@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const QuizzController = require('../controllers/category');
+const QuizzController = require('../controllers/question');
 
 // views
-router.get('/', QuizzController.findCategories);
-router.get('/:id', QuizzController.findCategory);
+router.get('/', QuizzController.findQuestions);
+router.get('/:id', QuizzController.findQuestion);
 
 // actions
 router.post('/create', QuizzController.create);
