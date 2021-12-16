@@ -3,10 +3,10 @@
     <div class="liste" v-if="afficheResultat == false">
           <progress :value="progress" max="100">70 %</progress>
 
-      <div class="question" v-if="questions[index].id_quiz == idQuiz">
+      <div class="question" v-if="questions[index].quiz_id == idQuiz">
         {{ questions[index].question }}
       </div>
-      <div v-if="questions[index].id_quiz == idQuiz">
+      <div v-if="questions[index].quiz_id == idQuiz">
         <div
           v-for="(proposition, index2) in questions[index].propositions"
           :key="proposition"
@@ -35,13 +35,13 @@
       <div v-for="(response, index3) in listResponse">
         <div
           style="background-color: red"
-          v-if="response !== questions[index3].réponse"
+          v-if="response !== questions[index3].answer"
         >
           {{ questions[index3].question }}
         </div>
         <div
           style="background-color: green"
-          v-if="response == questions[index3].réponse"
+          v-if="response == questions[index3].answer"
         >
           {{ questions[index3].question }}
         </div>
@@ -71,10 +71,11 @@ export default {
   mounted() {
     this.idQuiz = this.$route.params.id;
     axios
-      .get("http://localhost:5000/question/" + this.idQuiz)
+      .get("http://localhost:3000/question/" + this.idQuiz)
       .then((response) => {
         this.questions = response.data;
         this.propositions = this.questions.propositions;
+        console.log(this.questions)
       });
   },
   methods: {

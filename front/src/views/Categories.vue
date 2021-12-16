@@ -62,7 +62,7 @@ export default {
   methods: {},
   mounted () {
     axios
-      .get("http://localhost:5000/categories")
+      .get("http://localhost:3000/categories")
       .then((response) => (this.categories = response.data));
   },
 };

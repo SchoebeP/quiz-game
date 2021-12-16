@@ -11,7 +11,7 @@
     </div>
     <img
       class="pt-2 minion_img"
-      src="..\assets\img\personnage.png"
+      src="../assets/img/personnage.png"
       width="150px"
       alt=""
     />

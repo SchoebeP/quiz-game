@@ -1,4 +1,4 @@
-const Questions = require('../models/questions');
+const Questions = require('../models/question');
 
 module.exports = {
     findQuestions: async function() {
@@ -9,9 +9,20 @@ module.exports = {
         }
     },
 
-    findQuestions: async function(QuestionsId) {
+    findQuestion: async function(QuestionId) {
         try {
-            return await Questions.findById(QuestionsId);
+            let reply = await Questions.findOne({id: QuestionId});
+            console.log(reply)
+            return await Questions.findOne({id: QuestionId});
+        } catch (err) {
+            return { error: true, message: err };
+        }
+    },
+
+    findListOfQuestionsById: async function(QuizId) {
+        try {
+            console.log(QuizId)
+            return await Questions.find({quiz_id: QuizId});
         } catch (err) {
             return { error: true, message: err };
         }
@@ -42,9 +53,9 @@ module.exports = {
         }
     },
 
-    delete: async function(QuestionsId) {
+    delete: async function(QuestionId) {
         try {
-            return await Questions.findByIdAndDelete(QuestionsId);
+            return await Questions.findByIdAndDelete(QuestionId);
         } catch (err) {
             return { error: true, message: err };
         }

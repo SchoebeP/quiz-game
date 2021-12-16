@@ -11,7 +11,7 @@ module.exports = {
 
     findQuiz: async function(quizId) {
         try {
-            return await Quiz.findById(quizId);
+            return await Quiz.findOne({id: quizId});
         } catch (err) {
             return { error: true, message: err };
         }
