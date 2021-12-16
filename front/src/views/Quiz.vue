@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <div style="width:100%">
     <div class="liste" v-if="afficheResultat == false">
-          <progress :value="progress" max="100">70 %</progress>
-
+      <progress :value="progress" max="100">70 %</progress>
       <div class="question" v-if="questions[index].quiz_id == idQuiz">
         {{ questions[index].question }}
       </div>
@@ -75,7 +74,6 @@ export default {
       .then((response) => {
         this.questions = response.data;
         this.propositions = this.questions.propositions;
-        console.log(this.questions)
       });
   },
   methods: {
@@ -96,7 +94,7 @@ export default {
 progress[value] {
   /* Reset the default appearance */
   -webkit-appearance: none;
-   appearance: none;
+  appearance: none;
   width: 60%;
   height: 10px;
   margin-bottom: 10px;
@@ -110,10 +108,9 @@ progress[value]::-webkit-progress-bar {
 
 progress[value]::-webkit-progress-value {
   background: $purple;
-    border-radius: 10px; 
-    background-size: 35px 20px, 100% 100%, 100% 100%;
+  border-radius: 10px;
+  background-size: 35px 20px, 100% 100%, 100% 100%;
 }
-
 
 .liste {
   border-radius: 46px;
@@ -197,12 +194,12 @@ progress[value]::-webkit-progress-value {
   padding: 5px 10px;
   border-radius: 15px;
   margin: 0 auto;
-   cursor: pointer;
+  cursor: pointer;
 }
 
 .button:hover {
   background-color: $purple;
   color: white;
-  border-color: $purple; 
+  border-color: $purple;
 }
 </style>

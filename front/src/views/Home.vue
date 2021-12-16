@@ -1,9 +1,9 @@
 <template>
-  <div class="home">
+  <div class="home w-100">
     <b-row>
       <PlayButton msg="Jouer" />
     </b-row>
-    <b-row justify-end class="minion_row" >
+    <b-row style="position:absolute; bottom:120px; right:30px">
       <Minion title="Accueil"/>
     </b-row>
   </div>
