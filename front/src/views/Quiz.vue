@@ -128,15 +128,6 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/scss/custom.scss';
 
-.page {
-  width: 100%;
-}
-
-.wrapper {
-  display: flex;
-  justify-content: center;
-}
-
 progress[value] {
   /* Reset the default appearance */
   -webkit-appearance: none;
@@ -285,25 +276,6 @@ progress[value]::-webkit-progress-value {
 .button:hover {
   background-color: $purple;
   color: white;
-  border-color: $purple;
-  &--retour {
-    border: 1px solid $pink;
-
-    &:hover {
-      background-color: $pink;
-      color: white;
-      border-color: $pink;
-    }
-  }
-
-  &--sauvegarder {
-    border: 1px solid $purple;
-
-    &:hover {
-      background-color: $purple;
-      color: white;
-      border-color: $purple;
-    }
-  }
+  border-color: $purple; 
 }
 </style>
