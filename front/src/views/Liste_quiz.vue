@@ -55,19 +55,15 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "liste_quiz",
-  data() {
+  name: 'liste_quiz',
+  data () {
     return {
       idCategorie: null,
       quizs: null,
-      catName: null,
     };
-  },
-  methods: {
-    getCatName: function (response) {},
   },
 
   mounted() {
@@ -76,7 +72,14 @@ export default {
       .get("http://localhost:3000/quiz")
       .then((response) => (this.quizs = response.data));
   },
-};
+
+  mounted () {
+    this.idCategorie = this.$route.params.id
+    axios
+      .get('http://localhost:5000/quiz')
+      .then(response => (this.quizs = response.data))
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -105,4 +108,17 @@ export default {
 a {
   text-decoration: none !important;
 }
+  .quiz-title {
+    color: $black;
+    text-decoration: none !important;
+  }
+
+  &:hover {
+    background-color: $cyan;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
 </style>
