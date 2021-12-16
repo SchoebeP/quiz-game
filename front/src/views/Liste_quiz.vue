@@ -26,7 +26,7 @@
         style="margin: 0 auto"
       />
       <img
-       v-else-if="idCategorie == 5"
+        v-else-if="idCategorie == 5"
         width="200"
         src="../assets/img/culture.png"
         style="margin: 0 auto"
@@ -55,11 +55,11 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-  name: 'liste_quiz',
-  data () {
+  name: "liste_quiz",
+  data() {
     return {
       idCategorie: null,
       quizs: null,
@@ -72,14 +72,7 @@ export default {
       .get("http://localhost:3000/quiz")
       .then((response) => (this.quizs = response.data));
   },
-
-  mounted () {
-    this.idCategorie = this.$route.params.id
-    axios
-      .get('http://localhost:5000/quiz')
-      .then(response => (this.quizs = response.data))
-  }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -108,17 +101,4 @@ export default {
 a {
   text-decoration: none !important;
 }
-  .quiz-title {
-    color: $black;
-    text-decoration: none !important;
-  }
-
-  &:hover {
-    background-color: $cyan;
-  }
-
-  a {
-    text-decoration: none !important;
-  }
-
 </style>

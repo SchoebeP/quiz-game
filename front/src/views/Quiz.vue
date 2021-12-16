@@ -74,7 +74,6 @@ export default {
       .then((response) => {
         this.questions = response.data;
         this.propositions = this.questions.propositions;
-        console.log(this.questions);
       });
   },
   methods: {
