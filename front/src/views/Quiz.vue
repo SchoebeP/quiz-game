@@ -43,20 +43,31 @@
           style="background-color: green"
           v-if="response == questions[index3].answer"
         >
-          {{ questions[index3].question }}
-        </div>
-      </div>
+          <div
+            class="result-item wrong"
+            v-if="response !== questions[index3].réponse"
+          >
+            {{ index3 + 1 }}
+          </div>
+          <div
+            class="result-item true"
+            v-if="response == questions[index3].réponse"
+          >
+            {{ index3 + 1 }}
+          </div>
+        </li>
+      </ol>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "quiz",
+  name: 'quiz',
 
-  data() {
+  data () {
     return {
       idQuiz: null,
       questions: null,
@@ -68,8 +79,8 @@ export default {
       progress: 0,
     };
   },
-  mounted() {
-    this.idQuiz = this.$route.params.id;
+  mounted () {
+    this.idQuiz = this.$route.params.id
     axios
       .get("http://localhost:3000/question/" + this.idQuiz)
       .then((response) => {
@@ -91,7 +102,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/custom.scss";
+@import '../assets/scss/custom.scss';
+
+.results {
+  list-style: none;
+  counter-reset: counter;
+  margin-top: 2rem;
+  .result-item-wrapper {
+    counter-increment: counter;
+    margin: 0.25rem;
+    display: inline-block;
+  }
+}
+
+.result-item {
+  &:hover {
+    -webkit-animation: shadow-drop-center 0.4s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: shadow-drop-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  margin: 0 1rem;
+  font-size: 2rem;
+  flex-basis: 20%;
+}
+
+.true {
+  background-color: $pastel-green;
+}
+.wrong {
+  background-color: $pastel-red;
+}
 
 progress[value] {
   /* Reset the default appearance */
@@ -162,7 +211,7 @@ progress[value]::-webkit-progress-value {
 }
 
 .rad-design::before {
-  content: "";
+  content: '';
 
   display: inline-block;
   width: inherit;
@@ -197,12 +246,12 @@ progress[value]::-webkit-progress-value {
   padding: 5px 10px;
   border-radius: 15px;
   margin: 0 auto;
-   cursor: pointer;
+  cursor: pointer;
 }
 
 .button:hover {
   background-color: $purple;
   color: white;
-  border-color: $purple; 
+  border-color: $purple;
 }
 </style>
