@@ -31,6 +31,7 @@
       </div>
     </div>
     <div v-if="afficheResultat == true">
+<<<<<<< HEAD
       Resultat
       <div v-for="(response, index3) in listResponse">
         <div
@@ -42,6 +43,13 @@
         <div
           style="background-color: green"
           v-if="response == questions[index3].answer"
+=======
+      <h1>Résultats</h1>
+      <ol class="results">
+        <li
+          class="result-item-wrapper"
+          v-for="(response, index3) in listResponse"
+>>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
         >
           <div
             class="result-item wrong"
@@ -75,13 +83,19 @@ export default {
       checkedResponse: null,
       listResponse: [],
       index: 0,
+<<<<<<< HEAD
       afficheResultat: false,
       progress: 0,
     };
+=======
+      afficheResultat: false
+    }
+>>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
   },
   mounted () {
     this.idQuiz = this.$route.params.id
     axios
+<<<<<<< HEAD
       .get("http://localhost:3000/question/" + this.idQuiz)
       .then((response) => {
         this.questions = response.data;
@@ -99,6 +113,23 @@ export default {
     },
   },
 };
+=======
+      .get('http://localhost:5000/question/' + this.idQuiz)
+      .then(response => {
+        this.questions = response.data
+        this.propositions = this.questions.propositions
+      })
+  },
+  methods: {
+    sauvegarder: function (response) {
+      if (this.index < 2) this.index = this.index + 1
+      if (this.index == 2) this.afficheResultat = true
+      this.checkedResponse = null
+      this.listResponse.push(response)
+    }
+  }
+}
+>>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
 </script>
 
 <style lang="scss" scoped>
@@ -141,6 +172,7 @@ export default {
 .wrong {
   background-color: $pastel-red;
 }
+<<<<<<< HEAD
 
 progress[value] {
   /* Reset the default appearance */
@@ -163,6 +195,8 @@ progress[value]::-webkit-progress-value {
     background-size: 35px 20px, 100% 100%, 100% 100%;
 }
 
+=======
+>>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
 
 .liste {
   border-radius: 46px;
