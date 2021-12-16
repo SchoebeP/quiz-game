@@ -6,11 +6,13 @@ module.exports ={
             const username = req.body.username;
             const password = req.body.password;
             const user = await UserService.authenticate(username, password);
-            console.log(user);
+
             if (!user) {
                 return res.status(400).json({message:'username or password is incorrect' })
             }
-            return res.json(user)
+
+            req.session.user = user;
+            return res.json(user);
         } catch (error) {
             return res.status(500).json({error: error})
         }
