@@ -25,7 +25,7 @@ export default {
     this.idCategorie = this.$route.params.id;
     console.log(this.idCategorie);
     axios
-      .get("http://localhost:5000/quiz")
+      .get("http://localhost:3000/quiz")
       .then((response) => (this.quizs = response.data));
   },
 };
