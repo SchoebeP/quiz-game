@@ -5,15 +5,11 @@ const jwt = require('jsonwebtoken')
 module.exports = {
    authenticate: async function(username, password){
        try {
-        const user = await User.findOne({username});
+        const user = await User.findOne({ username });
 
         if (user && bcrypt.compareSync(password, user.password)) {
-            const token = jwt.sign({sub: user.id},process.env.SECRET_KEY, {expiresIn: '7d'});
-            return {
-                ...user.toJSON(),
-                token
-            };
-
+            const token = jwt.sign({ sub: user._id }, process.env.SECRET_KEY, { expiresIn: '7d' });
+            return { ...user.toJSON(), token };
         }
        } catch (error) {
             return { error: true, message: error };
@@ -24,7 +20,7 @@ module.exports = {
        try {
            return await User.find();
        } catch (error) {
-           return { error: true, message: error};
+           return { error: true, message: error };
        }
    },
 
@@ -36,18 +32,21 @@ module.exports = {
        }
    },
 
-   create: async function(userParam){
+   create: async function(requestBody) {
        try {
-           if(await User.findOne({username: userParam.username})){
-               throw 'Username "' + userParam.username +'"is alreday taken';
-           }
-           const user = new User(userParam);
+           let { fullname, username, email, password } = requestBody;
 
-           if(userParam.password){
-               user.password = bcrypt.hashSync(userParam.password, 10);
+           if (await User.findOne({ username })) {
+               return { error: true, message: 'Username already taken' };
            }
+           password = bcrypt.hashSync(password, 10);
 
-           await user.save();
+           const user = await User.create({
+               fullname, username, email, password
+           });
+
+           const token = jwt.sign({ sub: user._id }, process.env.SECRET_KEY, { expiresIn: '7d' });
+           return { ...user.toJSON(), token };
        } catch (error) {
            return { error: true, message: error };
        }

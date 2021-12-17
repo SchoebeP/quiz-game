@@ -8,7 +8,6 @@ const databaseConnection = require('./config/database');
 const jwt = require('./middleware/jwt');
 const errorHandler = require('./middleware/errorHandler');
 
-
 const app = express();
 
 app.use(cors());

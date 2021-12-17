@@ -8,11 +8,11 @@ module.exports ={
             const user = await UserService.authenticate(username, password);
 
             if (!user) {
-                return res.status(400).json({message:'username or password is incorrect' })
+                return res.status(400).json({ error: true, message: 'Username or password is incorrect' });
             }
 
             req.session.user = user;
-            return res.json(user);
+            return res.status(200).json(user);
         } catch (error) {
             return res.status(500).json({error: error})
         }
@@ -20,8 +20,9 @@ module.exports ={
 
     register: async function(req, res) {
         try {
-            const register = req.body;
-            const user = await UserService.create(register)
+            const user = await UserService.create(req.body);
+
+            req.session.user = user;
             return res.status(200).json(user);
         } catch (error) {
             return res.status(500).json({error: error})    
@@ -35,19 +36,6 @@ module.exports ={
                 return res.status(404).json({message: 'ther are no users'})
             }
             return res.json(users)
-        } catch (error) {
-            return res.status(500).json({error: error})
-        }
-    },
-
-    getCurrent: async function(req, res) {
-        try {
-            const user_id = req.params.id || {};
-            const user = await UserService.getById(user_id);
-            if(!user){
-                return res.status(404).json({message: 'this user does not exist.'})
-            }
-            return res.json(user)
         } catch (error) {
             return res.status(500).json({error: error})
         }
