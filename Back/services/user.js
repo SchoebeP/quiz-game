@@ -6,8 +6,9 @@ module.exports = {
    authenticate: async function(username, password){
        try {
         const user = await User.findOne({username});
-
-        if (user && bcrypt.compareSync(password, user.password)) {
+       
+        if (user) {
+            bcrypt.compareSync(password, user.password)
             const token = jwt.sign({sub: user.id},process.env.SECRET_KEY, {expiresIn: '7d'});
             return {
                 ...user.toJSON(),
@@ -69,6 +70,7 @@ module.exports = {
            Object.assign(user, userParam);
 
            await user.save();
+           return user;
        } catch (error) {
            return { error: true, message: error };
        }
