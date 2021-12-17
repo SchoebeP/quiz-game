@@ -1,8 +1,6 @@
 <template>
   <div id="nav" class="p-0">
     <Logo />
-    <router-link to="/inscription">Inscription</router-link> |
-    <router-link to="/about">About</router-link>
   </div>
 </template>
 
