@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="liste" v-if="afficheResultat == false">
-          <progress :value="progress" max="100">70 %</progress>
+      <progress :value="progress" max="100">70 %</progress>
 
       <div class="question" v-if="questions[index].quiz_id == idQuiz">
         {{ questions[index].question }}
@@ -31,35 +31,34 @@
       </div>
     </div>
     <div v-if="afficheResultat == true">
-<<<<<<< HEAD
-      Resultat
-      <div v-for="(response, index3) in listResponse">
-        <div
-          style="background-color: red"
-          v-if="response !== questions[index3].answer"
-        >
-          {{ questions[index3].question }}
-        </div>
-        <div
-          style="background-color: green"
-          v-if="response == questions[index3].answer"
-=======
       <h1>Résultats</h1>
       <ol class="results">
         <li
           class="result-item-wrapper"
           v-for="(response, index3) in listResponse"
->>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
         >
           <div
             class="result-item wrong"
-            v-if="response !== questions[index3].réponse"
+            v-if="response !== questions[index3].answer"
+            @mouseover="modal = true"
+            @mouseleave="modal = false"
+            :class="{ 'foo-hover': modal }"
           >
             {{ index3 + 1 }}
+            <div>
+              <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+
+              <b-modal id="modal-1" title="BootstrapVue">
+                <p class="my-4">Hello from modal!</p>
+              </b-modal>
+            </div>
           </div>
           <div
             class="result-item true"
-            v-if="response == questions[index3].réponse"
+            v-if="response == questions[index3].answer"
+            @mouseover="modal = true"
+            @mouseleave="modal = false"
+            :class="{ 'foo-hover': modal }"
           >
             {{ index3 + 1 }}
           </div>
@@ -83,41 +82,19 @@ export default {
       checkedResponse: null,
       listResponse: [],
       index: 0,
-<<<<<<< HEAD
       afficheResultat: false,
       progress: 0,
-    };
-=======
-      afficheResultat: false
+      modal: false
     }
->>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
   },
   mounted () {
     this.idQuiz = this.$route.params.id
     axios
-<<<<<<< HEAD
-      .get("http://localhost:3000/question/" + this.idQuiz)
-      .then((response) => {
-        this.questions = response.data;
-        this.propositions = this.questions.propositions;
-        console.log(this.questions)
-      });
-  },
-  methods: {
-    sauvegarder: function (response) {
-      if (this.index < 10) this.index = this.index + 1;
-      if (this.index == 10) this.afficheResultat = true;
-      this.checkedResponse = null;
-      this.progress = this.progress + 10;
-      this.listResponse.push(response);
-    },
-  },
-};
-=======
-      .get('http://localhost:5000/question/' + this.idQuiz)
+      .get('http://localhost:3000/question/' + this.idQuiz)
       .then(response => {
         this.questions = response.data
         this.propositions = this.questions.propositions
+        console.log(this.questions)
       })
   },
   methods: {
@@ -125,11 +102,11 @@ export default {
       if (this.index < 2) this.index = this.index + 1
       if (this.index == 2) this.afficheResultat = true
       this.checkedResponse = null
+      this.progress = this.progress + 10
       this.listResponse.push(response)
     }
   }
 }
->>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
 </script>
 
 <style lang="scss" scoped>
@@ -152,7 +129,6 @@ export default {
       cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     animation: shadow-drop-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   }
-
   width: 10rem;
   height: 10rem;
   display: flex;
@@ -164,6 +140,7 @@ export default {
   margin: 0 1rem;
   font-size: 2rem;
   flex-basis: 20%;
+  margin-bottom: 2rem;
 }
 
 .true {
@@ -172,12 +149,11 @@ export default {
 .wrong {
   background-color: $pastel-red;
 }
-<<<<<<< HEAD
 
 progress[value] {
   /* Reset the default appearance */
   -webkit-appearance: none;
-   appearance: none;
+  appearance: none;
   width: 60%;
   height: 10px;
   margin-bottom: 10px;
@@ -191,12 +167,9 @@ progress[value]::-webkit-progress-bar {
 
 progress[value]::-webkit-progress-value {
   background: $purple;
-    border-radius: 10px; 
-    background-size: 35px 20px, 100% 100%, 100% 100%;
+  border-radius: 10px;
+  background-size: 35px 20px, 100% 100%, 100% 100%;
 }
-
-=======
->>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
 
 .liste {
   border-radius: 46px;
