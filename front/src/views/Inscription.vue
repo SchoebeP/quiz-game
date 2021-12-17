@@ -1,30 +1,15 @@
 <template>
-  <div>
-    <form @submit="inscription">
-      <div class="wrapper">
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          placeholder="Full Name"
-        />
-        {{fullName}}
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="username"
-        />
-        <input type="email" id="mail" name="email" placeholder="Mail" />
-        <input
-          type="pasword"
-          id="pasword"
-          name="password"
-          placeholder="Mot de passe"
-        />
-      </div>
-      <input type="submit" value="Submit" />
-    </form>
+  <div class="wrapper">
+    <input v-model="fullname" placeholder="Nom Prénom" />
+    <input v-model="username" placeholder="Username" />
+    <input v-model="email" placeholder="Email" type="email" />
+    <input v-model="password" placeholder="Mot de passe" type="password" />
+    <b-button
+      class="button"
+      size="lg"
+      @click="inscription(fullname, username, email, password)"
+      >Inscription</b-button
+    >
   </div>
 </template>
 
@@ -33,22 +18,20 @@ import axios from "axios";
 
 export default {
   name: "inscription",
-  data: {
-    fullName: null,
-    name: null,
-    email: null,
+  data() {
+    return { fullname: null, username: null, email: null, password: null };
   },
   methods: {
-    inscription: function (fullName, username, email, password) {
+    inscription: function (fullname, username, email, password) {
       axios
-        .post("http://localhost:3000/register", {
-          fullName: fullName,
+        .post("http://localhost:3000/users/register", {
+          fullname: fullname,
           username: username,
           email: email,
           password: password,
         })
-        .then(function (response) {
-          console.log(response);
+        .then(function () {
+         window.location="http://localhost:3000/categories"
         })
         .catch(function (error) {
           console.log(error);
@@ -59,6 +42,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '/src/assets/scss/custom.scss';
+
+.button {
+  background: $purple;
+  color:black;
+  opacity: 0.7;
+}
+
+.button:hover {
+   background: $purple;
+  opacity: 1;
+}
+
+.title {
+  font-size:32px;
+  font-weight: bold;
+
+}
 .wrapper {
   display: flex;
   flex-direction: column;
