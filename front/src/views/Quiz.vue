@@ -1,7 +1,7 @@
 <template>
-  <div style="width:100%">
+  <div class="page">
     <div class="liste" v-if="afficheResultat == false">
-      <progress :value="progress" max="100">70 %</progress>
+      <progress :value="progress" max="100"></progress>
       <div class="question" v-if="questions[index].quiz_id == idQuiz">
         {{ questions[index].question }}
       </div>
@@ -22,9 +22,21 @@
             <div class="rad-text">{{ proposition }}</div>
           </label>
         </div>
-        <div v-if="checkedResponse !== null">
-          <div class="button" v-on:click="sauvegarder(checkedResponse)">
-            Valider
+        <div class="wrapper">
+          <div
+            v-if="index > 0"
+            class="button button--retour"
+            v-on:click="retour()"
+          >
+            Retour
+          </div>
+          <div v-if="checkedResponse !== null">
+            <div
+              class="button button--sauvegarder"
+              v-on:click="sauvegarder(checkedResponse)"
+            >
+              Valider
+            </div>
           </div>
         </div>
       </div>
@@ -84,12 +96,27 @@ export default {
       this.progress = this.progress + 10;
       this.listResponse.push(response);
     },
+    retour: function () {
+      this.index = this.index - 1;
+      this.checkedResponse = null;
+      this.progress = this.progress - 10;
+      this.listResponse.pop();
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/scss/custom.scss";
+
+.page {
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
 
 progress[value] {
   /* Reset the default appearance */
@@ -189,17 +216,30 @@ progress[value]::-webkit-progress-value {
 }
 
 .button {
-  border: 1px solid $purple;
   width: fit-content;
   padding: 5px 10px;
   border-radius: 15px;
-  margin: 0 auto;
   cursor: pointer;
-}
+  margin-right: 10px;
 
-.button:hover {
-  background-color: $purple;
-  color: white;
-  border-color: $purple;
+  &--retour {
+    border: 1px solid $pink;
+
+    &:hover {
+      background-color: $pink;
+      color: white;
+      border-color: $pink;
+    }
+  }
+
+  &--sauvegarder {
+    border: 1px solid $purple;
+
+    &:hover {
+      background-color: $purple;
+      color: white;
+      border-color: $purple;
+    }
+  }
 }
 </style>

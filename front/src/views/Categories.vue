@@ -32,9 +32,11 @@
         </router-link>
       </div>
     </b-row>
-    <b-row class="w-75 justify-content-end ">
-      <Minion title="Catégories"/>
-    </b-row>
+     <div style="position: absolute; bottom: 120px; right: 0">
+      <b-row class="w-75 justify-content-end">
+        <Minion title="Quiz" />
+      </b-row>
+    </div>
   </div>
 </template>
 
