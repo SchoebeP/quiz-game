@@ -9,9 +9,9 @@ router.get('/', UsersController.getAll);
 router.get('/my-results', ResultController.getResults);
 
 // actions
-router.post('/authenticate', UsersController.authenticate);
+router.post('/authenticate',jwt.checkJWT, UsersController.authenticate);
 router.post('/register', UsersController.register);
-router.put('/:id', UsersController.update);
-router.delete('/:id', UsersController.delete);
+router.put('/:id',jwt.checkJWT, UsersController.update);
+router.delete('/:id',jwt.checkJWT, UsersController.delete);
 
 module.exports = router;

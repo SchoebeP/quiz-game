@@ -56,12 +56,12 @@ module.exports ={
 
     update: async function(req, res) {
         try {
-            const data = {};
-            data.id = req.params.id || {};
-            data.name = req.body.name || '';
+            const data = req.body;
+            // data.id = req.params.id || {};
+            // data.name = req.body.username || '';
 
-            const user = await UserService.update(data.id, data.name);
-            return res.status(200).json(user);
+            const user = await UserService.update(req.params.id, data);
+            return res.status(200).json(user)
         } catch (error) {
             return res.status(500).json({error: error})
         }

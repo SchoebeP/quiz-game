@@ -68,6 +68,7 @@ module.exports = {
            Object.assign(user, userParam);
 
            await user.save();
+           return user;
        } catch (error) {
            return { error: true, message: error };
        }
