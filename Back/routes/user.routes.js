@@ -10,7 +10,7 @@ router.get('/:id',jwt.checkJWT, UsersController.getById);
 router.get('/current', UsersController.getCurrent);
 
 // actions
-router.post('/authenticate',jwt.checkJWT, UsersController.authenticate);
+router.post('/authenticate', UsersController.authenticate);
 router.post('/register', UsersController.register);
 router.put('/:id',jwt.checkJWT, UsersController.update);
 router.delete('/:id',jwt.checkJWT, UsersController.delete);
