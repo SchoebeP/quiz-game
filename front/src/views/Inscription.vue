@@ -31,7 +31,7 @@ export default {
           password: password,
         })
         .then(function () {
-         window.location="http://localhost:3000/categories"
+         window.location="http://localhost:8080/categories"
         })
         .catch(function (error) {
           console.log(error);
@@ -55,11 +55,6 @@ export default {
   opacity: 1;
 }
 
-.title {
-  font-size:32px;
-  font-weight: bold;
-
-}
 .wrapper {
   display: flex;
   flex-direction: column;
