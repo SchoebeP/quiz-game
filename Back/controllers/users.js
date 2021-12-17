@@ -57,8 +57,7 @@ module.exports ={
     update: async function(req, res) {
         try {
             const data = req.body;
-            // data.id = req.params.id || {};
-            // data.name = req.body.username || '';
+            
 
             const user = await UserService.update(req.params.id, data);
             return res.status(200).json(user)
