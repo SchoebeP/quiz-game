@@ -6,7 +6,7 @@ $cream: #ffc8dd;
 $pink: #ffafcc;
 $cyan: #bde0fe;
 $blue: #a2d2ff;
-$pastel-red: #dd77dd;
+$pastel-red: #ff6961;
 $pastel-green: #77dd77;
 $font: 'Comfortaa', 'sans-serif';
 $font-family-sans-serif: $font;
@@ -39,7 +39,8 @@ body {
 h1 {
   padding-top: 3rem;
   text-transform: uppercase;
-  font-size: 4rem;
+  font-size: 5rem;
+  font-weight: 800;
   color: $blue;
 }
 

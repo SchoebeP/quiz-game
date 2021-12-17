@@ -50,13 +50,26 @@
         >
           <div
             class="result-item wrong"
-            v-if="response !== questions[index3].réponse"
+            v-if="response !== questions[index3].answer"
+            @mouseover="modal = true"
+            @mouseleave="modal = false"
+            :class="{ 'foo-hover': modal }"
           >
             {{ index3 + 1 }}
+            <div>
+              <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+
+              <b-modal id="modal-1" title="BootstrapVue">
+                <p class="my-4">Hello from modal!</p>
+              </b-modal>
+            </div>
           </div>
           <div
             class="result-item true"
-            v-if="response == questions[index3].réponse"
+            v-if="response == questions[index3].answer"
+            @mouseover="modal = true"
+            @mouseleave="modal = false"
+            :class="{ 'foo-hover': modal }"
           >
             {{ index3 + 1 }}
           </div>
@@ -80,49 +93,53 @@ export default {
       checkedResponse: null,
       listResponse: [],
       index: 0,
-      afficheResultat: false
-    }
+<<<<<<< HEAD
       afficheResultat: false,
       progress: 0,
     };
+=======
+      afficheResultat: false
+    }
+>>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
   },
   mounted () {
     this.idQuiz = this.$route.params.id
     axios
-      .get('http://localhost:5000/question/' + this.idQuiz)
-      .then(response => {
-        this.questions = response.data
-        this.propositions = this.questions.propositions
-      })
+<<<<<<< HEAD
       .get("http://localhost:3000/question/" + this.idQuiz)
       .then((response) => {
         this.questions = response.data;
         this.propositions = this.questions.propositions;
+        console.log(this.questions)
       });
   },
   methods: {
     sauvegarder: function (response) {
-      if (this.index < 10) this.index = this.index + 1
-      if (this.index == 10) this.afficheResultat = true
-      this.checkedResponse = null
-      this.listResponse.push(response)
-    }
-  }
-}
       if (this.index < 10) this.index = this.index + 1;
       if (this.index == 10) this.afficheResultat = true;
       this.checkedResponse = null;
       this.progress = this.progress + 10;
       this.listResponse.push(response);
     },
-    retour: function () {
-      this.index = this.index - 1;
-      this.checkedResponse = null;
-      this.progress = this.progress - 10;
-      this.listResponse.pop();
-    },
   },
 };
+=======
+      .get('http://localhost:5000/question/' + this.idQuiz)
+      .then(response => {
+        this.questions = response.data
+        this.propositions = this.questions.propositions
+      })
+  },
+  methods: {
+    sauvegarder: function (response) {
+      if (this.index < 2) this.index = this.index + 1
+      if (this.index == 2) this.afficheResultat = true
+      this.checkedResponse = null
+      this.listResponse.push(response)
+    }
+  }
+}
+>>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
 </script>
 
 <style lang="scss" scoped>
@@ -166,7 +183,6 @@ progress[value]::-webkit-progress-value {
       cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     animation: shadow-drop-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   }
-
   width: 10rem;
   height: 10rem;
   display: flex;
@@ -178,6 +194,7 @@ progress[value]::-webkit-progress-value {
   margin: 0 1rem;
   font-size: 2rem;
   flex-basis: 20%;
+  margin-bottom: 2rem;
 }
 
 .true {
@@ -186,6 +203,30 @@ progress[value]::-webkit-progress-value {
 .wrong {
   background-color: $pastel-red;
 }
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+  width: 60%;
+  height: 10px;
+  margin-bottom: 10px;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-webkit-progress-value {
+  background: $purple;
+    border-radius: 10px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+=======
+>>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
 
 .liste {
   border-radius: 46px;
