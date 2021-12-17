@@ -6,7 +6,7 @@ module.exports = jwt;
 function jwt(){
     const secret = process.env.SECRET_KEY;
     return expressJwt({secret, algorithms: ['HS256'], isRevoked}).unless({
-        path: ['/users/authenticate', '/users/register']
+        path: ['/users/authenticate', '/users/register', '']
     });
 }
 
