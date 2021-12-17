@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 
 const userSchema = new mongoose.Schema({
-    fullName: {
+    fullname: {
         type: String,
         trim: true,
         required: true
@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+    role: {
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user'
     }
 });
 
@@ -39,4 +44,4 @@ userSchema.set('toJSON', {
 })
 
 
-module.exports = User = mongoose.model('User', userSchema)
+module.exports = User = mongoose.model('users', userSchema)
