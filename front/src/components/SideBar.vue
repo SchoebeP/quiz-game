@@ -1,25 +1,25 @@
 <template>
-  <div id="nav" class="p-0 ">
+  <div id="nav" class="p-0">
     <Logo />
-    <!-- <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> -->
+    <router-link to="/inscription">Inscription</router-link> |
+    <router-link to="/about">About</router-link>
   </div>
 </template>
 
 <script>
-import Logo from './Logo.vue'
+import Logo from "./Logo.vue";
 
 export default {
-  name: 'SideBar',
+  name: "SideBar",
   components: {
-    Logo
-  }
-}
+    Logo,
+  },
+};
 </script>
 
 <style lang="scss">
 /* eslint-disable */
-@import '/src/assets/scss/custom.scss';
+@import "/src/assets/scss/custom.scss";
 
 #nav {
   padding: 30px;
