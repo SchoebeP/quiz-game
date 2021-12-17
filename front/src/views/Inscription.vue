@@ -1,30 +1,60 @@
 <template>
   <div>
-    <form>
+    <form @submit="inscription">
       <div class="wrapper">
-        <input type="text" id="name" name="user_name" placeholder="Nom" />
         <input
           type="text"
-          id="prenom"
-          name="user_prenom"
-          placeholder="Prénom"
+          id="fullName"
+          name="fullName"
+          placeholder="Full Name"
         />
-        <input type="email" id="mail" name="user_mail" placeholder="Mail" />
+        {{fullName}}
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="username"
+        />
+        <input type="email" id="mail" name="email" placeholder="Mail" />
         <input
           type="pasword"
           id="pasword"
-          name="user_pasword"
+          name="password"
           placeholder="Mot de passe"
         />
       </div>
-      <button type="submit">Inscription</button>
+      <input type="submit" value="Submit" />
     </form>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "inscription",
+  data: {
+    fullName: null,
+    name: null,
+    email: null,
+  },
+  methods: {
+    inscription: function (fullName, username, email, password) {
+      axios
+        .post("http://localhost:3000/register", {
+          fullName: fullName,
+          username: username,
+          email: email,
+          password: password,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>
 
