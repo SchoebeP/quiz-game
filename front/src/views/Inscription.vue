@@ -31,7 +31,7 @@ export default {
           password: password,
         })
         .then(function () {
-         window.location="http://localhost:8080/categories"
+         window.location="http://localhost:8080/connexion"
         })
         .catch(function (error) {
           console.log(error);

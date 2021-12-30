@@ -17,7 +17,7 @@
         v-for="categorie in categories"
         :key="categorie.id"
       >
-        <router-link :to="{ name: 'liste_quiz', params: { id: categorie.id }}">
+      <button @click="listeQuizFunction(categorie.id)">
           <div>
             <img
               class="cat_img"
@@ -29,7 +29,7 @@
               {{ categorie.name }}
             </p>
           </div>
-        </router-link>
+        </button>
       </div>
     </b-row>
      <div style="position: absolute; bottom: 120px; right: 0">
@@ -56,13 +56,21 @@ export default {
   data () {
     return {
       tabIcon: [informatique, musique, animaux, sport, culture, cinema],
-      categories: null
+      categories: null,
+      idUser: null
     }
   },
 
   components: {},
-  methods: {},
+  methods: {
+    listeQuizFunction: function(categorie) {
+      console.log(categorie);
+      window.location = "http://localhost:8080/categories/" + categorie + this.idUser;
+
+    }
+  },
   mounted () {
+   this.idUser = window.location.search
     axios
       .get("http://localhost:3000/categories")
       .then((response) => (this.categories = response.data));
@@ -72,6 +80,15 @@ export default {
 
 <style lang="scss" scoped>
 @import '/src/assets/scss/custom.scss';
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 
 .categories-list {
   gap: 1rem;
