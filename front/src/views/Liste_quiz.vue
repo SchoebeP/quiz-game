@@ -40,9 +40,9 @@
 
       <div v-for="quiz in quizs" :key="quiz.id">
         <div class="liste" v-if="quiz.category_id == idCategorie">
-          <router-link :to="{ name: 'quiz', params: { id: quiz.id } }">
+          <button @click="quizFunction(quiz.id)">
             <div class="quiz-item">{{ quiz.name }}</div>
-          </router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -63,11 +63,17 @@ export default {
     return {
       idCategorie: null,
       quizs: null,
+      idUser: null,
     };
   },
-
+  methods: {
+    quizFunction: function (idquiz) { 
+      window.location = "http://localhost:8080/quiz/" + idquiz + this.idUser;
+    },
+  },
   mounted() {
     this.idCategorie = this.$route.params.id;
+    this.idUser = window.location.search;
     axios
       .get("http://localhost:3000/quiz")
       .then((response) => (this.quizs = response.data));
@@ -77,6 +83,16 @@ export default {
 
 <style lang="scss" scoped>
 @import "/src/assets/scss/custom.scss";
+
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 
 .liste {
   margin: 10px;

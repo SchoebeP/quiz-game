@@ -1,47 +1,158 @@
 <template>
   <div class="page">
-    <div class="wrapper-button">
-    <b-button
-      class="button"
-      size="md"
-      @click="$router.push('inscription')"
-      >Inscription</b-button
+    <div class="wrapper-button" v-if="idUser == ''">
+      <b-button class="button" size="md" @click="$router.push('inscription')"
+        >Inscription</b-button
+      >
+      <b-button class="button" size="md" @click="$router.push('connexion')"
+        >Connexion</b-button
+      >
+    </div>
+    <div v-else class="wrapper-button">
+      <b-button class="button" size="lg" @click="compte()">Mon compte</b-button>
+    </div>
+
+    <div
+    v-if ="idUser !== '' "
+      style="
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        height: 100vh;
+      "
     >
-    <b-button
-      class="button"
-      size="md"
-      @click="$router.push('connexion')"
-      >Connexion</b-button
+      <button
+        class="cta glow-on-hover"
+        size="lg"
+        @click="categorieFunction(idUser)"
+      >
+        Jouer
+      </button>
+    </div>
+    <div
+    v-else
+      style="
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        height: 100vh;
+      "
     >
+      <button
+        class="cta glow-on-hover"
+        size="lg"
+        @click="categorieFunction('')"
+      >
+        Jouer
+      </button>
     </div>
-    <div style="justify-content: center; display:flex; align-items: center; height:100vh">
-      <PlayButton msg="Jouer" />
-    </div>
-      <b-row style="position: absolute; bottom: 120px; right: 30px">
-        <Minion title="Accueil" />
-      </b-row>
-    </div>
+    <b-row style="position: absolute; bottom: 120px; right: 30px">
+      <Minion title="Accueil" />
+    </b-row>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import PlayButton from "@/components/PlayButton.vue";
 import Minion from "../components/Minion.vue";
 
 export default {
   name: "Home",
   components: {
-    PlayButton,
     Minion,
+  },
+  data() {
+    return {
+      idUser: null,
+    };
+  },
+  mounted() {
+    this.idUser = window.location.search;
+    console.log(this.idUser);
+  },
+  methods: {
+    compte: function () {
+      window.location = "http://localhost:8080/account/" + this.idUser;
+    },
+    categorieFunction: function (idUser) {
+      window.location = "http://localhost:8080/categories/" + idUser;
+    },
   },
 };
 </script>
 
 <style lang="scss">
 @import "/src/assets/scss/custom.scss";
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.glow-on-hover {
+  width: 10rem;
+  height: 6rem;
+  border: none;
+  outline: none;
+  color: $white;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  transition: all 0.18s ease-in-out;
 
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.glow-on-hover:before {
+  content: "";
+  background: $gradient;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: $gradient;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
 .button {
   background-color: $purple;
   color: black;
