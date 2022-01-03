@@ -2,7 +2,7 @@
   <div class="page">
     <div v-for="quiz in quizs" :key="quiz.id">
       <div class="liste" v-if="quiz.category_id == idCategorie">
-        <router-link :to="{ name: 'quiz', params: {id: quiz.id} }">
+        <router-link :to="{ name: 'quiz', params: { id: quiz.id } }">
           <div class="quiz">{{ quiz.name }}</div>
         </router-link>
       </div>
@@ -11,28 +11,28 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "liste_quiz",
-  data() {
+  name: 'liste_quiz',
+  data () {
     return {
       idCategorie: null,
-      quizs: null,
-    };
+      quizs: null
+    }
   },
-  mounted() {
-    this.idCategorie = this.$route.params.id;
-    console.log(this.idCategorie);
+  mounted () {
+    this.idCategorie = this.$route.params.id
+    console.log(this.idCategorie)
     axios
-      .get("http://localhost:3000/quiz")
-      .then((response) => (this.quizs = response.data));
-  },
-};
+      .get('http://localhost:3000/quiz')
+      .then(response => (this.quizs = response.data))
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "/src/assets/scss/custom.scss";
+@import 'src/assets/scss/custom.scss';
 
 .page {
   margin: 15%;

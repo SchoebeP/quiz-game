@@ -3,7 +3,7 @@
     <b-container fluid class="page-content">
       <b-row class="overflow-hidden">
         <b-col cols="4" class="p-0 m-auto">
-          <SideBar/>
+          <SideBar />
         </b-col>
         <b-col class="p-0">
           <router-view />
@@ -16,7 +16,7 @@
 <script>
 import SideBar from './components/SideBar.vue'
 export default {
-  name:"app",
+  name: 'app',
   components: {
     SideBar
   }
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '/src/assets/scss/custom.scss';
+@import 'src/assets/scss/custom.scss';
 
 #app {
   font-family: $font;
@@ -32,7 +32,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
 }
 
 .page-content {

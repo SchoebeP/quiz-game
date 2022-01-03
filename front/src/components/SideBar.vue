@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss">
 /* eslint-disable */
-@import '/src/assets/scss/custom.scss';
+@import 'src/assets/scss/custom.scss';
 
 #nav {
   padding: 30px;

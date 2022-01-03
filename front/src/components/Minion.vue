@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/custom.scss';
+@import 'src/assets/scss/custom.scss';
 
 .minion_text {
   border-radius: 12px;
@@ -51,7 +51,7 @@ export default {
 
 .minion_img {
   margin-top: -4rem;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     transform: rotate(-12deg);

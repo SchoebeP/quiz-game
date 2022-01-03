@@ -40,27 +40,37 @@
           <div
             class="result-item wrong"
             v-if="response !== questions[index3].answer"
-            @mouseover="modal = true"
-            @mouseleave="modal = false"
-            :class="{ 'foo-hover': modal }"
           >
             {{ index3 + 1 }}
-            <div>
-              <b-button v-b-modal.modal-1>Launch demo modal</b-button>
-
-              <b-modal id="modal-1" title="BootstrapVue">
-                <p class="my-4">Hello from modal!</p>
-              </b-modal>
-            </div>
+            <vodal :show="show" animation="zoom" @hide="show = false">
+              <v-container>
+                <v-row>
+                  <v-col>
+                    <h1>Question n°{{ index3 }}</h1>
+                    <p>{{ questions[index3].answer }}</p>
+                    <p class="false">{{ response }}</p>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </vodal>
           </div>
           <div
             class="result-item true"
             v-if="response == questions[index3].answer"
-            @mouseover="modal = true"
-            @mouseleave="modal = false"
-            :class="{ 'foo-hover': modal }"
+            @click="show = !show"
           >
             {{ index3 + 1 }}
+            <vodal :show="show" animation="zoom" @hide="show = false">
+              <v-container>
+                <v-row>
+                  <v-col>
+                    <h1>Question n°{{ index3 }}</h1>
+                    <p>{{ questions[index3].answer }}</p>
+                    <p class="true-text">{{ response }}</p>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </vodal>
           </div>
         </li>
       </ol>
@@ -84,7 +94,7 @@ export default {
       index: 0,
       afficheResultat: false,
       progress: 0,
-      modal: false
+      show: false
     }
   },
   mounted () {
@@ -110,7 +120,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/custom.scss';
+@import 'src/assets/scss/custom.scss';
 
 .results {
   list-style: none;
@@ -141,13 +151,6 @@ export default {
   font-size: 2rem;
   flex-basis: 20%;
   margin-bottom: 2rem;
-}
-
-.true {
-  background-color: $pastel-green;
-}
-.wrong {
-  background-color: $pastel-red;
 }
 
 progress[value] {

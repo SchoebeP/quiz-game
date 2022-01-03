@@ -17,7 +17,7 @@
         v-for="categorie in categories"
         :key="categorie.id"
       >
-        <router-link :to="{ name: 'liste_quiz', params: { id: categorie.id }}">
+        <router-link :to="{ name: 'liste_quiz', params: { id: categorie.id } }">
           <div>
             <img
               class="cat_img"
@@ -33,7 +33,7 @@
       </div>
     </b-row>
     <b-row class="w-75 justify-content-end ">
-      <Minion title="Catégories"/>
+      <Minion title="Catégories" />
     </b-row>
   </div>
 </template>
@@ -62,14 +62,14 @@ export default {
   methods: {},
   mounted () {
     axios
-      .get("http://localhost:3000/categories")
-      .then((response) => (this.categories = response.data));
-  },
-};
+      .get('http://localhost:3000/categories')
+      .then(response => (this.categories = response.data))
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import '/src/assets/scss/custom.scss';
+@import 'src/assets/scss/custom.scss';
 
 .categories-list {
   gap: 1rem;
