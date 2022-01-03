@@ -51,27 +51,37 @@
           <div
             class="result-item wrong"
             v-if="response !== questions[index3].answer"
-            @mouseover="modal = true"
-            @mouseleave="modal = false"
-            :class="{ 'foo-hover': modal }"
           >
             {{ index3 + 1 }}
-            <div>
-              <b-button v-b-modal.modal-1>Launch demo modal</b-button>
-
-              <b-modal id="modal-1" title="BootstrapVue">
-                <p class="my-4">Hello from modal!</p>
-              </b-modal>
-            </div>
+            <vodal :show="show" animation="zoom" @hide="show = false">
+              <v-container>
+                <v-row>
+                  <v-col>
+                    <h1>Question n°{{ index3 }}</h1>
+                    <p>{{ questions[index3].answer }}</p>
+                    <p class="false">{{ response }}</p>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </vodal>
           </div>
           <div
             class="result-item true"
             v-if="response == questions[index3].answer"
-            @mouseover="modal = true"
-            @mouseleave="modal = false"
-            :class="{ 'foo-hover': modal }"
+            @click="show = !show"
           >
             {{ index3 + 1 }}
+            <vodal :show="show" animation="zoom" @hide="show = false">
+              <v-container>
+                <v-row>
+                  <v-col>
+                    <h1>Question n°{{ index3 }}</h1>
+                    <p>{{ questions[index3].answer }}</p>
+                    <p class="true-text">{{ response }}</p>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </vodal>
           </div>
         </li>
       </ol>
@@ -92,20 +102,17 @@ export default {
       propositions: null,
       checkedResponse: null,
       listResponse: [],
-      index: 0,
-<<<<<<< HEAD
       afficheResultat: false,
       progress: 0,
     };
-=======
       afficheResultat: false
     }
->>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
+
   },
   mounted () {
     this.idQuiz = this.$route.params.id
     axios
-<<<<<<< HEAD
+
       .get("http://localhost:3000/question/" + this.idQuiz)
       .then((response) => {
         this.questions = response.data;
@@ -143,7 +150,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/custom.scss';
+@import 'src/assets/scss/custom.scss';
 
 progress[value] {
   /* Reset the default appearance */
@@ -195,13 +202,6 @@ progress[value]::-webkit-progress-value {
   font-size: 2rem;
   flex-basis: 20%;
   margin-bottom: 2rem;
-}
-
-.true {
-  background-color: $pastel-green;
-}
-.wrong {
-  background-color: $pastel-red;
 }
 
 progress[value] {

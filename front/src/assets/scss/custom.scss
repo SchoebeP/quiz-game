@@ -50,5 +50,18 @@ h1 {
   border-radius: 50%;
 }
 
+.true {
+  background-color: $pastel-green;
+}
+.wrong {
+  background-color: $pastel-red;
+}
+.true-text {
+  color: $pastel-green;
+}
+.wrong-text {
+  color: $pastel-red;
+}
+
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';

@@ -55,11 +55,11 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "liste_quiz",
-  data() {
+  name: 'liste_quiz',
+  data () {
     return {
       idCategorie: null,
       quizs: null,
@@ -75,14 +75,14 @@ export default {
     this.idCategorie = this.$route.params.id;
     this.idUser = window.location.search;
     axios
-      .get("http://localhost:3000/quiz")
-      .then((response) => (this.quizs = response.data));
-  },
-};
+      .get('http://localhost:3000/quiz')
+      .then(response => (this.quizs = response.data))
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "/src/assets/scss/custom.scss";
+@import 'src/assets/scss/custom.scss';
 
 button {
 	background: none;
