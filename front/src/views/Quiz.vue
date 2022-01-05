@@ -107,10 +107,10 @@
           </div>
         </li>
       </ol>
+      <button v-on:click="envoyer(idQuiz, listResponse)">
+        Sauvegarder le résultat
+      </button>
     </div>
-    <button v-on:click="envoyer(idQuiz, listResponse)">
-      Sauvegarder le résultat
-    </button>
   </div>
 </template>
 
