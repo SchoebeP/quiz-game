@@ -91,7 +91,7 @@ module.exports = {
                 if (results[index] === question.answer) score++;
             });
 
-            const response = await ResultService.submitResults(req.session.user._id, quiz._id, score);
+            const response = await ResultService.submitResults(req.session.user.id, quiz._id, score);
             if (!response || response.error) {
                 return res.status(500).json({ error: true, message: 'An error occured during the submission.' });
             }
