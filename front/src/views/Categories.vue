@@ -32,11 +32,9 @@
         </button>
       </div>
     </b-row>
-     <div style="position: absolute; bottom: 120px; right: 0">
-      <b-row class="w-75 justify-content-end">
-        <Minion title="Quiz" />
-      </b-row>
-    </div>
+    <b-row class="w-75 justify-content-end ">
+      <Minion title="Catégories"/>
+    </b-row>
   </div>
 </template>
 
@@ -72,23 +70,14 @@ export default {
   mounted () {
    this.idUser = window.location.search
     axios
-      .get("http://localhost:3000/categories")
-      .then((response) => (this.categories = response.data));
-  },
-};
+      .get('http://localhost:3000/categories')
+      .then(response => (this.categories = response.data))
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 @import '/src/assets/scss/custom.scss';
-button {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
 
 .categories-list {
   gap: 1rem;

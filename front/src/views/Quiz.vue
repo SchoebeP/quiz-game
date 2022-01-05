@@ -1,4 +1,7 @@
 <template>
+  <!-- @todo -->
+  <!-- Faire en sorte que les modal ne s'ouvrent pas toutes au click 
+  Trouver pourquoi la modale ne se ferme pas -->
   <div class="page">
     <div class="liste" v-if="afficheResultat == false">
       <progress :value="progress" max="100"></progress>
@@ -42,72 +45,150 @@
       </div>
     </div>
     <div v-if="afficheResultat == true">
-      Resultat
-      <div v-for="(response, index3) in listResponse">
-        <div
-          style="background-color: red"
-          v-if="response !== questions[index3].answer"
+      <h1>Résultats</h1>
+      <ol class="results">
+        <li
+          class="result-item-wrapper"
+          v-for="(response, index3) in listResponse"
         >
-          {{ questions[index3].question }}
-        </div>
-        <div
-          style="background-color: green"
-          v-if="response == questions[index3].answer"
-        >
-          {{ questions[index3].question }}
-        </div>
-      </div>
+          <div
+            class="result-item wrong"
+            v-if="response !== questions[index3].answer"
+          >
+            {{ index3 + 1 }}
+            <vodal
+              :show="show"
+              :mask="mask"
+              :animation="rotate"
+              @hide="show = false"
+            >
+              <div class="result-item-popup">
+                <h2 class="ri-title">Dommage !</h2>
+                <div class="result-item-question">
+                  {{ questions[index3].question }}
+                </div>
+                <div class="result-item-answer-correct ">
+                  La bonne réponse était :
+                  {{ questions[index3].answer }}
+                </div>
+                <div class="result-item-answer false">
+                  Votre réponse :
+                  {{ response }}
+                </div>
+              </div>
+              <b-btn @click="show = false">Fermer</b-btn>
+            </vodal>
+          </div>
+
+          <div
+            class="result-item true"
+            v-if="response == questions[index3].answer"
+          >
+            {{ index3 + 1 }}
+
+            <vodal
+              :show="show"
+              :mask="mask"
+              animation="rotate"
+              @hide="show = false"
+            >
+              <div class="result-item-popup">
+                <h2 class="ri-title">Bien joué</h2>
+                <div class="result-item-question">
+                  {{ questions[index3].question }}
+                </div>
+                <div class="result-item-answer-correct true">
+                  La bonne réponse était :
+                  {{ questions[index3].answer }}
+                </div>
+              </div>
+              <b-btn @click="show = false">Fermer</b-btn>
+            </vodal>
+          </div>
+        </li>
+      </ol>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "quiz",
+  name: 'quiz',
 
-  data() {
+  data () {
     return {
       idQuiz: null,
       questions: null,
       propositions: null,
       checkedResponse: null,
       listResponse: [],
-      index: 0,
       afficheResultat: false,
       progress: 0,
-    };
+      // show: false, @todo a décommenter pour afficher les modal
+      mask: false,
+      closeOnClickMask: false,
+      closeOnEsc: true
+    }
+
   },
-  mounted() {
-    this.idQuiz = this.$route.params.id;
+  mounted () {
+    this.idQuiz = this.$route.params.id
     axios
+
       .get("http://localhost:3000/question/" + this.idQuiz)
       .then((response) => {
         this.questions = response.data;
         this.propositions = this.questions.propositions;
+        console.log(this.questions)
       });
   },
   methods: {
     sauvegarder: function (response) {
-      if (this.index < 10) this.index = this.index + 1;
-      if (this.index == 10) this.afficheResultat = true;
-      this.checkedResponse = null;
-      this.progress = this.progress + 10;
-      this.listResponse.push(response);
-    },
-    retour: function () {
-      this.index = this.index - 1;
-      this.checkedResponse = null;
-      this.progress = this.progress - 10;
-      this.listResponse.pop();
+      if (this.index < 2) this.index = this.index + 1
+      if (this.index == 2) this.afficheResultat = true
+      this.checkedResponse = null
+      this.progress = this.progress + 10
+      this.listResponse.push(response)
     },
   },
 };
+=======
+      .get('http://localhost:5000/question/' + this.idQuiz)
+      .then(response => {
+        this.questions = response.data
+        this.propositions = this.questions.propositions
+      })
+  },
+  methods: {
+    sauvegarder: function (response) {
+      if (this.index < 2) this.index = this.index + 1
+      if (this.index == 2) this.afficheResultat = true
+      this.checkedResponse = null
+      this.listResponse.push(response)
+    },
+    retour: function () {
+      this.index = this.index - 1
+      this.checkedResponse = null
+      this.progress = this.progress - 10
+      this.listResponse.pop()
+    }
+  }
+}
+>>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
+    retour: function () {
+      this.index = this.index - 1
+      this.checkedResponse = null
+      this.progress = this.progress - 10
+      this.listResponse.pop()
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/custom.scss";
+@import '../assets/scss/custom.scss';
 
 .page {
   width: 100%;
@@ -118,26 +199,78 @@ export default {
   justify-content: center;
 }
 
+.results {
+  list-style: none;
+  counter-reset: counter;
+  margin-top: 2rem;
+  .result-item-wrapper {
+    counter-increment: counter;
+    margin: 0.25rem;
+    display: inline-block;
+  }
+}
+.result-item {
+  &:hover {
+    -webkit-animation: shadow-drop-center 0.4s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: shadow-drop-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  margin: 0 1rem;
+  font-size: 2rem;
+  flex-basis: 20%;
+  margin-bottom: 2rem;
+}
+
 progress[value] {
   /* Reset the default appearance */
   -webkit-appearance: none;
-  appearance: none;
+   appearance: none;
   width: 60%;
   height: 10px;
   margin-bottom: 10px;
 }
 
-progress[value]::-webkit-progress-bar {
-  background-color: #eee;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+.result-item {
+  &:hover {
+    -webkit-animation: shadow-drop-center 0.4s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: shadow-drop-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  margin: 0 1rem;
+  font-size: 2rem;
+  flex-basis: 20%;
 }
 
+.true {
+  background-color: $pastel-green;
 progress[value]::-webkit-progress-value {
   background: $purple;
-  border-radius: 10px;
-  background-size: 35px 20px, 100% 100%, 100% 100%;
+    border-radius: 10px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
 }
+.wrong {
+  background-color: $pastel-red;
+}
+
+=======
+>>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
 
 .liste {
   border-radius: 46px;
@@ -186,7 +319,7 @@ progress[value]::-webkit-progress-value {
 }
 
 .rad-design::before {
-  content: "";
+  content: '';
 
   display: inline-block;
   width: inherit;
@@ -213,6 +346,23 @@ progress[value]::-webkit-progress-value {
 
 .rad-input:checked ~ .rad-text {
   color: hsl(0, 0%, 40%);
+}
+
+// Modale de résultat
+.vodal-mask {
+  // display: none !important;
+}
+.vodal-dialog {
+  height: fit-content !important;
+}
+
+//Result items
+
+.ri-title,
+.result-item-question,
+.result-item-answer-correct,
+.result-item-answer-correct {
+  color: $black;
 }
 
 .button {

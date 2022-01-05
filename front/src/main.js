@@ -1,23 +1,34 @@
-import App from './App.vue';
-import Vue from 'vue';
-import router from './router';
-import { BootstrapVue } from 'bootstrap-vue';
-import '/src/assets/scss/_resets.scss';
-import '@/assets/scss/custom.scss';
+import App from './App.vue'
+import Vue from 'vue'
+import router from './router'
 
-import Minion from './components/Minion.vue';
+import Vodal from 'vodal'
+
+import { BootstrapVue } from 'bootstrap-vue'
+import '/src/assets/scss/_resets.scss'
+import '@/assets/scss/custom.scss'
+
+import Minion from './components/Minion.vue'
 
 // d'abord bootstrap puis bootstrap-vue
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'vuetify/dist/vuetify.min.css'
+// include animation styles
+import 'vodal/common.css'
+import 'vodal/rotate.css'
 
-Vue.component('Minion', Minion);
+import vuetify from './plugins/vuetify'
 
-Vue.config.productionTip = false;
+Vue.component('Minion', Minion)
+Vue.component(Vodal.name, Vodal)
+
+Vue.config.productionTip = false
 
 Vue.use(BootstrapVue);
 
 new Vue({
   router,
-  render: (h) => h(App),
-}).$mount('#app');
+  vuetify,
+  render: h => h(App)
+}).$mount('#app')
