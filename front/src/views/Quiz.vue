@@ -146,11 +146,11 @@ export default {
   },
   methods: {
     sauvegarder: function (response) {
-      if (this.index < 10) this.index = this.index + 1;
-      if (this.index == 10) this.afficheResultat = true;
-      this.checkedResponse = null;
-      this.progress = this.progress + 10;
-      this.listResponse.push(response);
+      if (this.index < 2) this.index = this.index + 1
+      if (this.index == 2) this.afficheResultat = true
+      this.checkedResponse = null
+      this.progress = this.progress + 10
+      this.listResponse.push(response)
     },
   },
 };
@@ -177,6 +177,14 @@ export default {
   }
 }
 >>>>>>> 1079d215930276e209fe632a504d53abdb9c62d0
+    retour: function () {
+      this.index = this.index - 1
+      this.checkedResponse = null
+      this.progress = this.progress - 10
+      this.listResponse.pop()
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -230,16 +238,35 @@ progress[value] {
   margin-bottom: 10px;
 }
 
-progress[value]::-webkit-progress-bar {
-  background-color: #eee;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+.result-item {
+  &:hover {
+    -webkit-animation: shadow-drop-center 0.4s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: shadow-drop-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  width: 10rem;
+  height: 10rem;
+  display: flex;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  margin: 0 1rem;
+  font-size: 2rem;
+  flex-basis: 20%;
 }
 
+.true {
+  background-color: $pastel-green;
 progress[value]::-webkit-progress-value {
   background: $purple;
     border-radius: 10px; 
     background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+.wrong {
+  background-color: $pastel-red;
 }
 
 =======
