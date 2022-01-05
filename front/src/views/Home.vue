@@ -1,19 +1,23 @@
 <template>
   <div class="page">
-    <div class="wrapper-button" v-if="idUser == ''">
-      <b-button class="button" size="md" @click="$router.push('inscription')"
-        >Inscription</b-button
-      >
-      <b-button class="button" size="md" @click="$router.push('connexion')"
-        >Connexion</b-button
-      >
-    </div>
-    <div v-else class="wrapper-button">
-      <b-button class="button" size="lg" @click="compte()">Mon compte</b-button>
+    <div class="buttons">
+      <div class="wrapper-button" v-if="idUser == ''">
+        <b-button class="button" size="md" @click="$router.push('inscription')"
+          >Inscription</b-button
+        >
+        <b-button class="button" size="md" @click="$router.push('connexion')"
+          >Connexion</b-button
+        >
+      </div>
+      <div v-else class="wrapper-button">
+        <b-button class="button" size="lg" @click="compte()"
+          >Mon compte</b-button
+        >
+      </div>
     </div>
 
     <div
-    v-if ="idUser !== '' "
+      v-if="idUser !== ''"
       style="
         justify-content: center;
         display: flex;
@@ -30,7 +34,7 @@
       </button>
     </div>
     <div
-    v-else
+      v-else
       style="
         justify-content: center;
         display: flex;
@@ -55,35 +59,35 @@
 <script>
 // @ is an alias to /src
 
-import Minion from "../components/Minion.vue";
+import Minion from '../components/Minion.vue'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    Minion,
+    Minion
   },
-  data() {
+  data () {
     return {
-      idUser: null,
-    };
+      idUser: null
+    }
   },
-  mounted() {
-    this.idUser = window.location.search;
-    console.log(this.idUser);
+  mounted () {
+    this.idUser = window.location.search
+    console.log(this.idUser)
   },
   methods: {
     compte: function () {
-      window.location = "http://localhost:8081/account/" + this.idUser;
+      window.location = 'http://localhost:8081/account/' + this.idUser
     },
     categorieFunction: function (idUser) {
-      window.location = "http://localhost:8081/categories/" + idUser;
-    },
-  },
-};
+      window.location = 'http://localhost:8081/categories/' + idUser
+    }
+  }
+}
 </script>
 
 <style lang="scss">
-@import "src/assets/scss/custom.scss";
+@import 'src/assets/scss/custom.scss';
 button {
   background: none;
   color: inherit;
@@ -93,6 +97,17 @@ button {
   cursor: pointer;
   outline: inherit;
 }
+
+.buttons {
+  position: fixed;
+  right: 0;
+}
+
+button {
+  background: $purple;
+  color: $white !important;
+}
+
 .glow-on-hover {
   width: 10rem;
   height: 6rem;
@@ -110,7 +125,7 @@ button {
 }
 
 .glow-on-hover:before {
-  content: "";
+  content: '';
   background: $gradient;
   position: absolute;
   top: -2px;
@@ -132,7 +147,7 @@ button {
 
 .glow-on-hover:after {
   z-index: -1;
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
