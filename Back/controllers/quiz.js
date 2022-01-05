@@ -1,4 +1,6 @@
 const QuizService = require('../services/quiz');
+const QuestionService = require('../services/question');
+const ResultService = require('../services/result');
 
 module.exports = {
     findQuizzes: async function(req, res) {
@@ -63,6 +65,38 @@ module.exports = {
             const response = await QuizService.delete(quizId);
 
             return res.json(response);
+        } catch (err) {
+            return res.status(500).json({ error: err });
+        }
+    },
+
+    submitResults: async function(req, res) {
+        try {
+            const quizId = req.params.id || {};
+            const quiz = await QuizService.findQuiz(quizId);
+            if (!quiz) {
+                return res.status(404).json({ error: true, message: 'This quiz does not exist.' });
+            }
+
+            const questions = await QuestionService.findListOfQuestionsById(quizId);
+            if (!questions) {
+                return res.status(404).json({ error: true, message: 'This quiz does not contain any questions.' });
+            }
+
+            let { results } = req.body;
+            results = JSON.parse(results);
+
+            let score = 0;
+            questions.forEach((question, index) => {
+                if (results[index] === question.answer) score++;
+            });
+
+            const response = await ResultService.submitResults(req.session.user._id, quiz._id, score);
+            if (!response || response.error) {
+                return res.status(500).json({ error: true, message: 'An error occured during the submission.' });
+            }
+
+            return res.status(200).json({ error: false, message: 'Submission successfuly sent !' });
         } catch (err) {
             return res.status(500).json({ error: err });
         }

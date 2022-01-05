@@ -7,5 +7,13 @@ module.exports = {
         } catch (error) {
             return { error: true, message: error };
         }
+    },
+
+    submitResults: async (userId, quizId, score) => {
+        try {
+            return await Result.create({ quiz: quizId, user: userId, score });
+        } catch (error) {
+            return { error: true, message: error };
+        }
     }
 };
