@@ -19,6 +19,22 @@
         <span class="font-weight-bold"> {{ this.user.email }} </span>
       </span>
     </section>
+    <section class="user-score">
+      <h2>Vos statistiques</h2>
+      <span class="user-infos-item">
+        <span class="font-weight-bold">
+          {{ this.user.fullname }}
+        </span>
+      </span>
+      <span class="user-infos-item">
+        Pseudo :
+        <span class="font-weight-bold"> {{ this.user.username }} </span>
+      </span>
+      <span class="user-infos-item">
+        Email :
+        <span class="font-weight-bold"> {{ this.user.email }} </span>
+      </span>
+    </section>
   </div>
 </template>
 
