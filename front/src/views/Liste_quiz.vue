@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100%">
-    <div class="d-flex ml-5 flex-column liste">
+    <div class="d-flex mt-5 ml-5 flex-column liste">
       <img
         v-if="idCategorie == 1"
         width="200"
@@ -63,17 +63,17 @@ export default {
     return {
       idCategorie: null,
       quizs: null,
-      idUser: null,
-    };
+      idUser: null
+    }
   },
   methods: {
-    quizFunction: function (idquiz) { 
-      window.location = "http://localhost:8081/quiz/" + idquiz + this.idUser;
-    },
+    quizFunction: function (idquiz) {
+      window.location = 'http://localhost:8081/quiz/' + idquiz + this.idUser
+    }
   },
-  mounted() {
-    this.idCategorie = this.$route.params.id;
-    this.idUser = window.location.search;
+  mounted () {
+    this.idCategorie = this.$route.params.id
+    this.idUser = window.location.search
     axios
       .get('http://localhost:3000/quiz')
       .then(response => (this.quizs = response.data))
@@ -85,13 +85,13 @@ export default {
 @import 'src/assets/scss/custom.scss';
 
 button {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 .liste {

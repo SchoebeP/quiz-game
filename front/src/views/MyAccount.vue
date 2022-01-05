@@ -3,29 +3,55 @@
     <h1 style="text-align: center">
       Bienvenue sur votre compte {{ this.user.fullname }}
     </h1>
-    <h3> Résultat </h3>
-    {{this.user}}
+    <section class="user-infos">
+      <h2>Vos informations</h2>
+      <span class="user-infos-item">
+        <span class="font-weight-bold">
+          {{ this.user.fullname }}
+        </span>
+      </span>
+      <span class="user-infos-item">
+        Pseudo :
+        <span class="font-weight-bold"> {{ this.user.username }} </span>
+      </span>
+      <span class="user-infos-item">
+        Email :
+        <span class="font-weight-bold"> {{ this.user.email }} </span>
+      </span>
+    </section>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  name: "Account",
-  data() {
+  name: 'Account',
+  data () {
     return {
       idUser: null,
-      user: {},
-    };
+      user: {}
+    }
   },
-  mounted() {
-    this.idUser = window.location.search.slice(4);
+  mounted () {
+    this.idUser = window.location.search.slice(4)
     axios
-      .get("http://localhost:3000/users/" + this.idUser)
-      .then((response) => (this.user = response.data));
-  },
-};
+      .get('http://localhost:3000/users/' + this.idUser)
+      .then(response => (this.user = response.data))
+  }
+}
 </script>
 
 <style lang="scss" scoped>
+@import 'src/assets/scss/custom.scss';
+
+.user-infos {
+  margin: auto;
+  margin-top: 2rem;
+  background: $cyan;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 1rem;
+  border-radius: 12px;
+}
 </style>
