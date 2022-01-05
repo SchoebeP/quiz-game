@@ -1,6 +1,6 @@
 <template>
   <div style="width: 100%; margin-top: 20px">
-    <button v-on:click="deconnexion()">Deconnexion</button>
+    <button class="logout" v-on:click="deconnexion()">Deconnexion</button>
     <h1 style="text-align: center" class="font-weight-bold">
       Bienvenue, {{ this.user.fullname }}
     </h1>
@@ -67,6 +67,19 @@ export default {
 
 <style lang="scss" scoped>
 @import 'src/assets/scss/custom.scss';
+
+.logout {
+  background: $purple;
+  color: $white;
+  opacity: 0.7;
+  padding: 0.3rem;
+  border-radius: 11px;
+  transition: all 0.2s ease-in-out;
+}
+.logout:hover {
+  background: $purple;
+  opacity: 1;
+}
 
 .user-infos {
   margin: auto;

@@ -2,15 +2,21 @@
   <div class="page">
     <div class="buttons">
       <div class="wrapper-button" v-if="idUser == ''">
-        <b-button class="button" size="md" @click="$router.push('inscription')"
+        <b-button
+          class="acc-button"
+          size="md"
+          @click="$router.push('inscription')"
           >Inscription</b-button
         >
-        <b-button class="button" size="md" @click="$router.push('connexion')"
+        <b-button
+          class="acc-button"
+          size="md"
+          @click="$router.push('connexion')"
           >Connexion</b-button
         >
       </div>
       <div v-else class="wrapper-button">
-        <b-button class="button" size="lg" @click="compte()"
+        <b-button class="acc-button" size="md" @click="compte()"
           >Mon compte</b-button
         >
       </div>
@@ -103,11 +109,21 @@ button {
   right: 0;
 }
 
-button {
-  background: $purple;
+.button,
+.btn {
+  background-color: $purple;
   color: $white !important;
 }
 
+.acc-button {
+  background: $purple !important;
+  margin: 0.2rem 0.5rem;
+  transition: all 0.2s ease-in-out;
+  filter: opacity(1);
+  &:hover {
+    filter: opacity(0.8);
+  }
+}
 .glow-on-hover {
   width: 10rem;
   height: 6rem;

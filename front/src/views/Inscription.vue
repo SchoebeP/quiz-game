@@ -71,5 +71,9 @@ input {
   &:active {
     border-color: $purple;
   }
+
+  &::placeholder {
+    color: gray;
+  }
 }
 </style>
