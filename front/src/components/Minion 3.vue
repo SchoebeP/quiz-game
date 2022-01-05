@@ -28,10 +28,13 @@ export default {
 
 <style lang="scss" scoped>
 @import 'src/assets/scss/custom.scss';
+<<<<<<< HEAD
 
 .minion {
   position: relative;
 }
+=======
+>>>>>>> results
 
 .minion_text {
   border-radius: 12px;
@@ -56,8 +59,12 @@ export default {
   position: absolute;
   margin-top: -4rem;
   transition: all 0.2s ease-in-out;
+<<<<<<< HEAD
   bottom: -7rem;
   left: 50%;
+=======
+
+>>>>>>> results
   &:hover {
     transform: rotate(-12deg);
   }

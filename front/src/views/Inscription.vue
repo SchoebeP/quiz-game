@@ -31,7 +31,7 @@ export default {
           password: password,
         })
         .then(function () {
-         window.location="http://localhost:8080/connexion"
+         window.location="http://localhost:8081/connexion"
         })
         .catch(function (error) {
           console.log(error);
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '/src/assets/scss/custom.scss';
+@import 'src/assets/scss/custom.scss';
 
 .button {
   background: $purple;

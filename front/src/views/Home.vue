@@ -73,17 +73,17 @@ export default {
   },
   methods: {
     compte: function () {
-      window.location = "http://localhost:8080/account/" + this.idUser;
+      window.location = "http://localhost:8081/account/" + this.idUser;
     },
     categorieFunction: function (idUser) {
-      window.location = "http://localhost:8080/categories/" + idUser;
+      window.location = "http://localhost:8081/categories/" + idUser;
     },
   },
 };
 </script>
 
 <style lang="scss">
-@import "/src/assets/scss/custom.scss";
+@import "src/assets/scss/custom.scss";
 button {
   background: none;
   color: inherit;
