@@ -9,9 +9,18 @@
 <script>
 export default {
   name: 'Logo',
+  data () {
+    return {
+      idUser: null
+    }
+  },
+  mounted () {
+   this.idUser = window.location.search
+   console.log(this.idUser)
+   },
   methods: {
     redirectToHome () {
-      this.$router.push({ path: '/' })
+       window.location = "http://localhost:8080/" + this.idUser;
     }
   }
 }
