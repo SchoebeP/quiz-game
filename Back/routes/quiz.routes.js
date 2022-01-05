@@ -13,6 +13,6 @@ router.put('/:id/update',jwt.checkJWT, QuizController.update);
 router.delete('/:id/delete',jwt.checkJWT, QuizController.delete);
 
 // submit results
-router.post('/:id/submit-results', jwt.checkJWT, QuizController.submitResults);
+router.post('/:id/submit-results', QuizController.submitResults);
 
 module.exports = router;

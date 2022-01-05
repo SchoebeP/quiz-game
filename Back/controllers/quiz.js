@@ -73,6 +73,7 @@ module.exports = {
     submitResults: async function(req, res) {
         try {
             const quizId = req.params.id || {};
+            
             const quiz = await QuizService.findQuiz(quizId);
             if (!quiz) {
                 return res.status(404).json({ error: true, message: 'This quiz does not exist.' });
@@ -82,16 +83,18 @@ module.exports = {
             if (!questions) {
                 return res.status(404).json({ error: true, message: 'This quiz does not contain any questions.' });
             }
-
             let { results } = req.body;
-            results = JSON.parse(results);
+            let {id} = req.body;
+            console.log(results)
+            //results = JSON.parse(results);
 
             let score = 0;
             questions.forEach((question, index) => {
                 if (results[index] === question.answer) score++;
             });
-
-            const response = await ResultService.submitResults(req.session.user.id, quiz._id, score);
+            console.log(req.session)
+            const response = await ResultService.submitResults(id, quiz._id, score);
+            console.log(response)
             if (!response || response.error) {
                 return res.status(500).json({ error: true, message: 'An error occured during the submission.' });
             }
