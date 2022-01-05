@@ -1,5 +1,6 @@
 <template>
   <div style="width: 100%; margin-top: 20px">
+    <button v-on:click="deconnexion()"> Deconnexion </button>
     <h1 style="text-align: center" class="font-weight-bold">
       Bienvenue, {{ this.user.fullname }}
     </h1>
@@ -52,6 +53,12 @@ export default {
     axios
       .get('http://localhost:3000/users/my-results/' + this.idUser)
       .then(response => (this.tabResult = response.data))
+  },
+  methods: {
+    deconnexion: function() {
+      axios.get("http://localhost:3000/users/logout").then(response => console.log(response))
+      window.location = "http://localhost:8081/"
+    }
   }
 }
 </script>

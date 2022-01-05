@@ -1,6 +1,9 @@
 const UserService = require('../services/user');
 
 module.exports ={
+    logout: async function(req, res) {
+        req.session.destroy();
+    },
     authenticate: async function(req, res) {
         try {
             const username = req.body.username;
