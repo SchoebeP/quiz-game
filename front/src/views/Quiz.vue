@@ -56,7 +56,7 @@
             v-if="response !== questions[index3].answer"
           >
             {{ index3 + 1 }}
-            <vodal
+            <!-- <vodal
               :show="show"
               :mask="mask"
               :animation="rotate"
@@ -77,7 +77,7 @@
                 </div>
               </div>
               <b-btn @click="show = false">Fermer</b-btn>
-            </vodal>
+            </vodal>-->
           </div>
 
           <div
@@ -85,7 +85,7 @@
             v-if="response == questions[index3].answer"
           >
             {{ index3 + 1 }}
-
+            <!--
             <vodal
               :show="show"
               :mask="mask"
@@ -103,23 +103,27 @@
                 </div>
               </div>
               <b-btn @click="show = false">Fermer</b-btn>
-            </vodal>
+            </vodal>-->
           </div>
         </li>
       </ol>
     </div>
+    <button v-on:click="envoyer(idQuiz, listResponse)">
+      Sauvegarder le résultat
+    </button>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
-  name: 'quiz',
+  name: "quiz",
 
-  data () {
+  data() {
     return {
       idQuiz: null,
+      idUser: null,
       questions: null,
       propositions: null,
       checkedResponse: null,
@@ -130,38 +134,51 @@ export default {
       // show: false, @todo a décommenter pour afficher les modal
       mask: false,
       closeOnClickMask: false,
-      closeOnEsc: true
-    }
+      closeOnEsc: true,
+    };
   },
-  mounted () {
-    this.idQuiz = this.$route.params.id
+  mounted() {
+    this.idQuiz = this.$route.params.id;
+    this.idUser = window.location.search;
     axios
-      .get('http://localhost:3000/question/' + this.idQuiz)
-      .then(response => {
-        this.questions = response.data
-        this.propositions = this.questions.propositions
-      })
+      .get("http://localhost:3000/question/" + this.idQuiz)
+      .then((response) => {
+        this.questions = response.data;
+        this.propositions = this.questions.propositions;
+      });
   },
   methods: {
+    envoyer: function (idQuiz, result) {
+      const id = this.idUser.slice(4);
+      const results = Object.assign({}, result);
+      axios
+        .post("http://localhost:3000/quiz/" + idQuiz + "/submit-results", {
+          id: id,
+          results: results,
+        })
+        .then((response) => {
+          window.location = "http://localhost:8081/account/" + this.idUser;
+        });
+    },
     sauvegarder: function (response) {
-      if (this.index < 10) this.index = this.index + 1
-      if (this.index == 10) this.afficheResultat = true
-      this.checkedResponse = null
-      this.progress = this.progress + 10
-      this.listResponse.push(response)
+      if (this.index < 10) this.index = this.index + 1;
+      if (this.index == 10) this.afficheResultat = true;
+      this.checkedResponse = null;
+      this.progress = this.progress + 10;
+      this.listResponse.push(response);
     },
     retour: function () {
-      this.index = this.index - 1
-      this.checkedResponse = null
-      this.progress = this.progress - 10
-      this.listResponse.pop()
-    }
-  }
-}
+      this.index = this.index - 1;
+      this.checkedResponse = null;
+      this.progress = this.progress - 10;
+      this.listResponse.pop();
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/custom.scss';
+@import "../assets/scss/custom.scss";
 
 .page {
   width: 100%;
@@ -270,7 +287,7 @@ progress[value]::-webkit-progress-value {
 }
 
 .rad-design::before {
-  content: '';
+  content: "";
 
   display: inline-block;
   width: inherit;
