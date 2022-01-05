@@ -113,6 +113,7 @@ button {
 .btn {
   background-color: $purple;
   color: $white !important;
+  transition: all 0.23s ease-in-out;
 }
 
 .acc-button {
