@@ -12,7 +12,10 @@ export default {
   components: {
     Logo,
   },
+  
+
   methods: {},
+   
 };
 </script>
 
