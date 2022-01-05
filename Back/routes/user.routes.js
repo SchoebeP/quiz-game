@@ -6,7 +6,8 @@ const jwt = require('../middleware/jwt');
 
 // views
 
-router.get('/my-results', jwt.checkJWT, ResultController.getResults);
+router.get('/my-results/:id', ResultController.getResults);
+router.get('/logout', UsersController.logout)
 
 router.get('/', jwt.checkJWT, UsersController.getAll);
 router.get('/:id', UsersController.getById);
