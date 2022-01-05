@@ -1,4 +1,7 @@
 <template>
+  <!-- @todo -->
+  <!-- Faire en sorte que les modal ne s'ouvrent pas toutes au click 
+  Trouver pourquoi la modale ne se ferme pas -->
   <div class="page">
     <div class="liste" v-if="afficheResultat == false">
       <progress :value="progress" max="100"></progress>
@@ -53,34 +56,53 @@
             v-if="response !== questions[index3].answer"
           >
             {{ index3 + 1 }}
-            <vodal :show="show" animation="zoom" @hide="show = false">
-              <v-container>
-                <v-row>
-                  <v-col>
-                    <h1>Question n°{{ index3 }}</h1>
-                    <p>{{ questions[index3].answer }}</p>
-                    <p class="false">{{ response }}</p>
-                  </v-col>
-                </v-row>
-              </v-container>
+            <vodal
+              :show="show"
+              :mask="mask"
+              :animation="rotate"
+              @hide="show = false"
+            >
+              <div class="result-item-popup">
+                <h2 class="ri-title">Dommage !</h2>
+                <div class="result-item-question">
+                  {{ questions[index3].question }}
+                </div>
+                <div class="result-item-answer-correct ">
+                  La bonne réponse était :
+                  {{ questions[index3].answer }}
+                </div>
+                <div class="result-item-answer false">
+                  Votre réponse :
+                  {{ response }}
+                </div>
+              </div>
+              <b-btn @click="show = false">Fermer</b-btn>
             </vodal>
           </div>
+
           <div
             class="result-item true"
             v-if="response == questions[index3].answer"
-            @click="show = !show"
           >
             {{ index3 + 1 }}
-            <vodal :show="show" animation="zoom" @hide="show = false">
-              <v-container>
-                <v-row>
-                  <v-col>
-                    <h1>Question n°{{ index3 }}</h1>
-                    <p>{{ questions[index3].answer }}</p>
-                    <p class="true-text">{{ response }}</p>
-                  </v-col>
-                </v-row>
-              </v-container>
+
+            <vodal
+              :show="show"
+              :mask="mask"
+              animation="rotate"
+              @hide="show = false"
+            >
+              <div class="result-item-popup">
+                <h2 class="ri-title">Bien joué</h2>
+                <div class="result-item-question">
+                  {{ questions[index3].question }}
+                </div>
+                <div class="result-item-answer-correct true">
+                  La bonne réponse était :
+                  {{ questions[index3].answer }}
+                </div>
+              </div>
+              <b-btn @click="show = false">Fermer</b-btn>
             </vodal>
           </div>
         </li>
@@ -104,8 +126,10 @@ export default {
       listResponse: [],
       afficheResultat: false,
       progress: 0,
-    };
-      afficheResultat: false
+      // show: false, @todo a décommenter pour afficher les modal
+      mask: false,
+      closeOnClickMask: false,
+      closeOnEsc: true
     }
 
   },
@@ -143,6 +167,12 @@ export default {
       if (this.index == 2) this.afficheResultat = true
       this.checkedResponse = null
       this.listResponse.push(response)
+    },
+    retour: function () {
+      this.index = this.index - 1
+      this.checkedResponse = null
+      this.progress = this.progress - 10
+      this.listResponse.pop()
     }
   }
 }
@@ -150,27 +180,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'src/assets/scss/custom.scss';
+@import '../assets/scss/custom.scss';
 
-progress[value] {
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-  appearance: none;
-  width: 60%;
-  height: 10px;
-  margin-bottom: 10px;
+.page {
+  width: 100%;
 }
 
-progress[value]::-webkit-progress-bar {
-  background-color: #eee;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
-}
-
-progress[value]::-webkit-progress-value {
-  background: $purple;
-  border-radius: 10px;
-  background-size: 35px 20px, 100% 100%, 100% 100%;
+.wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .results {
@@ -183,7 +201,6 @@ progress[value]::-webkit-progress-value {
     display: inline-block;
   }
 }
-
 .result-item {
   &:hover {
     -webkit-animation: shadow-drop-center 0.4s
@@ -304,19 +321,48 @@ progress[value]::-webkit-progress-value {
   color: hsl(0, 0%, 40%);
 }
 
+// Modale de résultat
+.vodal-mask {
+  // display: none !important;
+}
+.vodal-dialog {
+  height: fit-content !important;
+}
+
+//Result items
+
+.ri-title,
+.result-item-question,
+.result-item-answer-correct,
+.result-item-answer-correct {
+  color: $black;
+}
+
 .button {
   width: fit-content;
   padding: 5px 10px;
   border-radius: 15px;
-  margin: 0 auto;
-  cursor: pointer;
-}
   cursor: pointer;
   margin-right: 10px;
 
-.button:hover {
-  background-color: $purple;
-  color: white;
-  border-color: $purple; 
+  &--retour {
+    border: 1px solid $pink;
+
+    &:hover {
+      background-color: $pink;
+      color: white;
+      border-color: $pink;
+    }
+  }
+
+  &--sauvegarder {
+    border: 1px solid $purple;
+
+    &:hover {
+      background-color: $purple;
+      color: white;
+      border-color: $purple;
+    }
+  }
 }
 </style>
