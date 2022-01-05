@@ -17,7 +17,11 @@
         v-for="categorie in categories"
         :key="categorie.id"
       >
+<<<<<<< HEAD
       <button @click="listeQuizFunction(categorie.id)">
+=======
+        <router-link :to="{ name: 'liste_quiz', params: { id: categorie.id } }">
+>>>>>>> results
           <div>
             <img
               class="cat_img"
@@ -32,9 +36,17 @@
         </button>
       </div>
     </b-row>
+<<<<<<< HEAD
+     <div style="position: absolute; bottom: 120px; right: 0">
+      <b-row class="w-75 justify-content-end">
+        <Minion title="Quiz" />
+      </b-row>
+    </div>
+=======
     <b-row class="w-75 justify-content-end ">
-      <Minion title="Catégories"/>
+      <Minion title="Catégories" />
     </b-row>
+>>>>>>> results
   </div>
 </template>
 
@@ -77,7 +89,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+<<<<<<< HEAD
 @import 'src/assets/scss/custom.scss';
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+=======
+@import 'src/assets/scss/custom.scss';
+>>>>>>> results
 
 .categories-list {
   gap: 1rem;

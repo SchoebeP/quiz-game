@@ -20,7 +20,7 @@ export default {
    },
   methods: {
     redirectToHome () {
-       window.location = "http://localhost:8080/" + this.idUser;
+       window.location = "http://localhost:8081/" + this.idUser;
     }
   }
 }
