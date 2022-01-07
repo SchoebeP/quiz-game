@@ -1,32 +1,44 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <b-container fluid class="page-content">
+      <b-row class="overflow-hidden">
+        <b-col cols="4" class="p-0 m-auto">
+          <SideBar />
+        </b-col>
+        <b-col class="p-0 vh-100 d-flex ">
+          <router-view />
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
+<script>
+import SideBar from './components/SideBar.vue'
+export default {
+  name: 'app',
+  components: {
+    SideBar
+  }
+}
+</script>
+
 <style lang="scss">
+@import 'src/assets/scss/custom.scss';
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: $font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+.page-content {
+  background: $white;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.landing-row {
+  justify-content: flex-start !important;
 }
 </style>
