@@ -8,8 +8,6 @@
   "workspaces":["front", "Back"],
   "scripts": {
     "dev:back":"npm run start --workspace=Back",
-    "dev:front":"npm run serve --workspace=front",
-    "build": "npm run build --workspace=front"
-    
+    "dev:front":"npm run serve --workspace=front -- --port=\"8081\""    
   }
 }

@@ -85,16 +85,12 @@ module.exports = {
             }
             let { results } = req.body;
             let {id} = req.body;
-            console.log(results)
-            //results = JSON.parse(results);
 
             let score = 0;
             questions.forEach((question, index) => {
                 if (results[index] === question.answer) score++;
             });
-            console.log(req.session)
             const response = await ResultService.submitResults(id, quiz._id, score);
-            console.log(response)
             if (!response || response.error) {
                 return res.status(500).json({ error: true, message: 'An error occured during the submission.' });
             }

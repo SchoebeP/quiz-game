@@ -16,7 +16,6 @@ export default {
   },
   mounted () {
    this.idUser = window.location.search
-   console.log(this.idUser)
    },
   methods: {
     redirectToHome () {

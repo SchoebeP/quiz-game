@@ -62,7 +62,6 @@ export default {
   components: {},
   methods: {
     listeQuizFunction: function(categorie) {
-      console.log(categorie);
       window.location = "http://localhost:8081/categories/" + categorie + this.idUser;
 
     }
